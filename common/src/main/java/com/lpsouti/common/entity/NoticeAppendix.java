@@ -10,32 +10,27 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 工单内容表
- * @TableName ticket_content
+ * 通知附件表
+ * @TableName notice_appendices
  */
-@TableName(value ="ticket_content")
+@TableName(value ="notice_appendices")
 @Data
-public class TicketContent implements Serializable {
+public class NoticeAppendix implements Serializable {
     /**
-     * 工单内容id
+     * 通知附件id
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 工单id
+     * 通知id
      */
-    private Long ticketId;
+    private Long noticeId;
 
     /**
-     * 工单内容
+     * 附件url
      */
-    private String content;
-
-    /**
-     * 作者。1用户 2客服
-     */
-    private Integer author;
+    private String appendixUrl;
 
     /**
      * 创建时间
@@ -66,11 +61,10 @@ public class TicketContent implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TicketContent other = (TicketContent) that;
+        NoticeAppendix other = (NoticeAppendix) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTicketId() == null ? other.getTicketId() == null : this.getTicketId().equals(other.getTicketId()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+            && (this.getNoticeId() == null ? other.getNoticeId() == null : this.getNoticeId().equals(other.getNoticeId()))
+            && (this.getAppendixUrl() == null ? other.getAppendixUrl() == null : this.getAppendixUrl().equals(other.getAppendixUrl()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -81,9 +75,8 @@ public class TicketContent implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getTicketId() == null) ? 0 : getTicketId().hashCode());
-        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
-        result = prime * result + ((getAuthor() == null) ? 0 : getAuthor().hashCode());
+        result = prime * result + ((getNoticeId() == null) ? 0 : getNoticeId().hashCode());
+        result = prime * result + ((getAppendixUrl() == null) ? 0 : getAppendixUrl().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -97,9 +90,8 @@ public class TicketContent implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", ticketId=").append(ticketId);
-        sb.append(", content=").append(content);
-        sb.append(", author=").append(author);
+        sb.append(", noticeId=").append(noticeId);
+        sb.append(", appendixUrl=").append(appendixUrl);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

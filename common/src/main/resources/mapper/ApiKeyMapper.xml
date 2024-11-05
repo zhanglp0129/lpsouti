@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpsouti.common.mapper.ApiKeyMapper">
+
+    <resultMap id="BaseResultMap" type="com.lpsouti.common.entity.ApiKey">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="secretId" column="secret_id" jdbcType="CHAR"/>
+            <result property="secretKey" column="secret_key" jdbcType="CHAR"/>
+            <result property="salt" column="salt" jdbcType="VARCHAR"/>
+            <result property="isEnabled" column="is_enabled" jdbcType="BIT"/>
+            <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"/>
+            <result property="onlyFree" column="only_free" jdbcType="BIT"/>
+            <result property="note" column="note" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,secret_id,
+        secret_key,salt,is_enabled,
+        expire_time,only_free,note,
+        create_time,update_time,is_deleted
+    </sql>
+</mapper>

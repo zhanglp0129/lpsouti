@@ -10,6 +10,8 @@ spring:
     password: ${lpsouti.database.password}
   jackson:
     default-property-inclusion: non_null
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    time-zone: Asia/Shanghai
   data:
     redis:
       host: ${lpsouti.redis.host:localhost}
@@ -27,6 +29,9 @@ mybatis-plus:
     db-config:
       update-strategy: not_null
       id-type: auto
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 logging:
   file:
     name: ${lpsouti.log.filename:logs/admin.log}

@@ -10,32 +10,47 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 工单内容表
- * @TableName ticket_content
+ * 用户表
+ * @TableName users
  */
-@TableName(value ="ticket_content")
+@TableName(value ="users")
 @Data
-public class TicketContent implements Serializable {
+public class User implements Serializable {
     /**
-     * 工单内容id
+     * 用户id
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 工单id
+     * 用户名
      */
-    private Long ticketId;
+    private String username;
 
     /**
-     * 工单内容
+     * 用户邮箱
      */
-    private String content;
+    private String email;
 
     /**
-     * 作者。1用户 2客服
+     * MD5加密后的密码
      */
-    private Integer author;
+    private String password;
+
+    /**
+     * 加密随机盐值
+     */
+    private String salt;
+
+    /**
+     * 用户角色。1管理员 2普通用户
+     */
+    private Integer role;
+
+    /**
+     * 用户状态。1正常 2封禁
+     */
+    private Integer status;
 
     /**
      * 创建时间
@@ -66,11 +81,14 @@ public class TicketContent implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TicketContent other = (TicketContent) that;
+        User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTicketId() == null ? other.getTicketId() == null : this.getTicketId().equals(other.getTicketId()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+            && (this.getSalt() == null ? other.getSalt() == null : this.getSalt().equals(other.getSalt()))
+            && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -81,9 +99,12 @@ public class TicketContent implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getTicketId() == null) ? 0 : getTicketId().hashCode());
-        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
-        result = prime * result + ((getAuthor() == null) ? 0 : getAuthor().hashCode());
+        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getSalt() == null) ? 0 : getSalt().hashCode());
+        result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -97,9 +118,12 @@ public class TicketContent implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", ticketId=").append(ticketId);
-        sb.append(", content=").append(content);
-        sb.append(", author=").append(author);
+        sb.append(", username=").append(username);
+        sb.append(", email=").append(email);
+        sb.append(", password=").append(password);
+        sb.append(", salt=").append(salt);
+        sb.append(", role=").append(role);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

@@ -10,32 +10,32 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 工单内容表
- * @TableName ticket_content
+ * 支付方式表
+ * @TableName pay_methods
  */
-@TableName(value ="ticket_content")
+@TableName(value ="pay_methods")
 @Data
-public class TicketContent implements Serializable {
+public class PayMethod implements Serializable {
     /**
-     * 工单内容id
+     * 支付方式id
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 工单id
+     * 支付方式名称
      */
-    private Long ticketId;
+    private String name;
 
     /**
-     * 工单内容
+     * 支付货币。用英文缩写
      */
-    private String content;
+    private String currency;
 
     /**
-     * 作者。1用户 2客服
+     * 充值倍率。充值1单位货币可以获得多少余额
      */
-    private Integer author;
+    private Integer rate;
 
     /**
      * 创建时间
@@ -66,11 +66,11 @@ public class TicketContent implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TicketContent other = (TicketContent) that;
+        PayMethod other = (PayMethod) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTicketId() == null ? other.getTicketId() == null : this.getTicketId().equals(other.getTicketId()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
+            && (this.getRate() == null ? other.getRate() == null : this.getRate().equals(other.getRate()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -81,9 +81,9 @@ public class TicketContent implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getTicketId() == null) ? 0 : getTicketId().hashCode());
-        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
-        result = prime * result + ((getAuthor() == null) ? 0 : getAuthor().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
+        result = prime * result + ((getRate() == null) ? 0 : getRate().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -97,9 +97,9 @@ public class TicketContent implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", ticketId=").append(ticketId);
-        sb.append(", content=").append(content);
-        sb.append(", author=").append(author);
+        sb.append(", name=").append(name);
+        sb.append(", currency=").append(currency);
+        sb.append(", rate=").append(rate);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

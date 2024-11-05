@@ -10,32 +10,52 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 工单内容表
- * @TableName ticket_content
+ * api接口表
+ * @TableName apis
  */
-@TableName(value ="ticket_content")
+@TableName(value ="apis")
 @Data
-public class TicketContent implements Serializable {
+public class Api implements Serializable {
     /**
-     * 工单内容id
+     * api接口id
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 工单id
+     * 请求方式
      */
-    private Long ticketId;
+    private String method;
 
     /**
-     * 工单内容
+     * 请求路径。不能使用路径参数
      */
-    private String content;
+    private String path;
 
     /**
-     * 作者。1用户 2客服
+     * 接口名称
      */
-    private Integer author;
+    private String name;
+
+    /**
+     * 接口描述。markdown格式，会展示在接口文档中
+     */
+    private String description;
+
+    /**
+     * 是否可用
+     */
+    private Boolean isEnabled;
+
+    /**
+     * 是否为免费接口
+     */
+    private Boolean isFree;
+
+    /**
+     * 每次调用消耗余额
+     */
+    private Integer consumeBalance;
 
     /**
      * 创建时间
@@ -66,11 +86,15 @@ public class TicketContent implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TicketContent other = (TicketContent) that;
+        Api other = (Api) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTicketId() == null ? other.getTicketId() == null : this.getTicketId().equals(other.getTicketId()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+            && (this.getMethod() == null ? other.getMethod() == null : this.getMethod().equals(other.getMethod()))
+            && (this.getPath() == null ? other.getPath() == null : this.getPath().equals(other.getPath()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getIsEnabled() == null ? other.getIsEnabled() == null : this.getIsEnabled().equals(other.getIsEnabled()))
+            && (this.getIsFree() == null ? other.getIsFree() == null : this.getIsFree().equals(other.getIsFree()))
+            && (this.getConsumeBalance() == null ? other.getConsumeBalance() == null : this.getConsumeBalance().equals(other.getConsumeBalance()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -81,9 +105,13 @@ public class TicketContent implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getTicketId() == null) ? 0 : getTicketId().hashCode());
-        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
-        result = prime * result + ((getAuthor() == null) ? 0 : getAuthor().hashCode());
+        result = prime * result + ((getMethod() == null) ? 0 : getMethod().hashCode());
+        result = prime * result + ((getPath() == null) ? 0 : getPath().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getIsEnabled() == null) ? 0 : getIsEnabled().hashCode());
+        result = prime * result + ((getIsFree() == null) ? 0 : getIsFree().hashCode());
+        result = prime * result + ((getConsumeBalance() == null) ? 0 : getConsumeBalance().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -97,9 +125,13 @@ public class TicketContent implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", ticketId=").append(ticketId);
-        sb.append(", content=").append(content);
-        sb.append(", author=").append(author);
+        sb.append(", method=").append(method);
+        sb.append(", path=").append(path);
+        sb.append(", name=").append(name);
+        sb.append(", description=").append(description);
+        sb.append(", isEnabled=").append(isEnabled);
+        sb.append(", isFree=").append(isFree);
+        sb.append(", consumeBalance=").append(consumeBalance);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

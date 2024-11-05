@@ -10,35 +10,45 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 工单内容表
- * @TableName ticket_content
+ * api调用记录表
+ * @TableName api_records
  */
-@TableName(value ="ticket_content")
+@TableName(value ="api_records")
 @Data
-public class TicketContent implements Serializable {
+public class ApiRecord implements Serializable {
     /**
-     * 工单内容id
+     * api调用记录id
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 工单id
+     * api key id
      */
-    private Long ticketId;
+    private Long keyId;
 
     /**
-     * 工单内容
+     * api id
      */
-    private String content;
+    private Long apiId;
 
     /**
-     * 作者。1用户 2客服
+     * 消耗余额
      */
-    private Integer author;
+    private Integer consumeBalance;
 
     /**
-     * 创建时间
+     * 调用者ip
+     */
+    private String ip;
+
+    /**
+     * 调用错误信息。null表示调用成功
+     */
+    private String err;
+
+    /**
+     * 创建时间。接口调用时间
      */
     private Date createTime;
 
@@ -66,11 +76,13 @@ public class TicketContent implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TicketContent other = (TicketContent) that;
+        ApiRecord other = (ApiRecord) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTicketId() == null ? other.getTicketId() == null : this.getTicketId().equals(other.getTicketId()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+            && (this.getKeyId() == null ? other.getKeyId() == null : this.getKeyId().equals(other.getKeyId()))
+            && (this.getApiId() == null ? other.getApiId() == null : this.getApiId().equals(other.getApiId()))
+            && (this.getConsumeBalance() == null ? other.getConsumeBalance() == null : this.getConsumeBalance().equals(other.getConsumeBalance()))
+            && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()))
+            && (this.getErr() == null ? other.getErr() == null : this.getErr().equals(other.getErr()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -81,9 +93,11 @@ public class TicketContent implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getTicketId() == null) ? 0 : getTicketId().hashCode());
-        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
-        result = prime * result + ((getAuthor() == null) ? 0 : getAuthor().hashCode());
+        result = prime * result + ((getKeyId() == null) ? 0 : getKeyId().hashCode());
+        result = prime * result + ((getApiId() == null) ? 0 : getApiId().hashCode());
+        result = prime * result + ((getConsumeBalance() == null) ? 0 : getConsumeBalance().hashCode());
+        result = prime * result + ((getIp() == null) ? 0 : getIp().hashCode());
+        result = prime * result + ((getErr() == null) ? 0 : getErr().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -97,9 +111,11 @@ public class TicketContent implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", ticketId=").append(ticketId);
-        sb.append(", content=").append(content);
-        sb.append(", author=").append(author);
+        sb.append(", keyId=").append(keyId);
+        sb.append(", apiId=").append(apiId);
+        sb.append(", consumeBalance=").append(consumeBalance);
+        sb.append(", ip=").append(ip);
+        sb.append(", err=").append(err);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

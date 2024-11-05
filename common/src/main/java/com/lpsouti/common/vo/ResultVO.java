@@ -16,6 +16,10 @@ public class ResultVO<T> {
         return new ResultVO<>(1000, data, null);
     }
 
+    public static ResultVO<Object> success() {
+        return new ResultVO<>(1000, null, null);
+    }
+
     public static ResultVO<Object> error(String msg) {
         return new ResultVO<>(2000, null, msg);
     }
