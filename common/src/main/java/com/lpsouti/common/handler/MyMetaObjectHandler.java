@@ -1,4 +1,4 @@
-package com.lpsouti.common.config;
+package com.lpsouti.common.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

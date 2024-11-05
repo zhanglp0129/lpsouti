@@ -2,7 +2,6 @@ package com.lpsouti.common.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lpsouti.common.entity.Notice;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author zhanglp0129

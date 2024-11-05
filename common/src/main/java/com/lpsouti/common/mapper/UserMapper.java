@@ -2,7 +2,7 @@ package com.lpsouti.common.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lpsouti.common.entity.User;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
 * @author zhanglp0129
@@ -12,6 +12,9 @@ import org.apache.ibatis.annotations.Mapper;
 */
 public interface UserMapper extends BaseMapper<User> {
 
+    // 查询数据库中是否存在记录
+    @Select("select exists(select 1 from users where is_deleted=0)")
+    boolean exists();
 }
 
 
