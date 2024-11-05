@@ -1,0 +1,9 @@
+lpsouti:
+  server:
+    port: 9721
+  database:
+    url: jdbc:mysql://127.0.0.1:3306/lpsouti?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  log:
+    level: debug

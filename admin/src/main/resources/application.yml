@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: prod
+  application:
+    name: admin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${lpsouti.database.url}
+    username: ${lpsouti.database.username}
+    password: ${lpsouti.database.password}
+  jackson:
+    default-property-inclusion: non_null
+mybatis-plus:
+  global-config:
+    db-config:
+      update-strategy: not_null
+      id-type: auto
+logging:
+  file:
+    name: ${lpsouti.log.filename:logs/admin.log}
+  level:
+    com.lpsouti: ${lpsouti.log.level:info}
+  pattern:
+    dateformat: "yyyy-MM-dd HH:mm:ss.SSS"
+server:
+  port: ${lpsouti.server.port:8080}
+  address: ${lpsouti.server.address:0.0.0.0}
