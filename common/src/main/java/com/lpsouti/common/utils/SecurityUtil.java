@@ -48,7 +48,7 @@ public class SecurityUtil {
      * @return 密钥id
      */
     public static String generateSecretId(@NotNull Long userId) {
-        return generateSecret(userId, true);
+        return generateSecret(userId, true, 42);
     }
 
     /**
@@ -58,11 +58,11 @@ public class SecurityUtil {
      * @return 密钥
      */
     public static String generateSecretKey(@NotNull Long userId) {
-        return generateSecret(userId, false);
+        return generateSecret(userId, false, 42);
     }
 
     // 生成secretId或secretKey
-    private static String generateSecret(Long userId, boolean isSecretId) {
+    private static String generateSecret(Long userId, boolean isSecretId, int minLength) {
         // 准备参数
         String user = userId.toString();
         String timestamp = ""+System.currentTimeMillis();
@@ -78,8 +78,11 @@ public class SecurityUtil {
         // 求sha256
         try {
             MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-            byte[] result = sha256.digest(input);
-            return toBase36String(result);
+            String result = toBase36String(sha256.digest(input));
+            if (result.length()<minLength) {
+                generateSecret(userId, isSecretId, minLength);
+            }
+            return result;
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -123,7 +126,7 @@ public class SecurityUtil {
 
     // 将字节数组转为36进制字符串
     private static String toBase36String(byte[] input) {
-        BigInteger integer = new BigInteger(input);
+        BigInteger integer = new BigInteger(1, input);
         return integer.toString(36);
     }
 }
