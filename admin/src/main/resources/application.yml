@@ -10,6 +10,18 @@ spring:
     password: ${lpsouti.database.password}
   jackson:
     default-property-inclusion: non_null
+  data:
+    redis:
+      host: ${lpsouti.redis.host:localhost}
+      port: ${lpsouti.redis.port:6379}
+      database: ${lpsouti.redis.database:0}
+      password: ${lpsouti.redis.password:}
+      lettuce:
+        pool:
+          max-active: ${lpsouti.redis.max-active:18}
+          max-idle: ${lpsouti.redis.max-idle:16}
+          min-idle: ${lpsouti.redis.min-idle:0}
+          max-wait: ${lpsouti.redis.max-wait:10s}
 mybatis-plus:
   global-config:
     db-config:
