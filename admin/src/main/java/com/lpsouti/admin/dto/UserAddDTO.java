@@ -1,6 +1,9 @@
 package com.lpsouti.admin.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,18 +37,23 @@ public class UserAddDTO implements Serializable {
     /**
      * 密码，明文
      */
+    @NotEmpty
     @Length(min = 8, max = 16)
     private String password;
 
     /**
      * 用户角色，1管理员 2普通用户
      */
-    @NotEmpty
-    private long role;
+    @NotNull
+    @Min(1)
+    @Max(2)
+    private Long role;
 
     /**
      * 用户状态，1正常 2封禁
      */
+    @Min(1)
+    @Max(2)
     private Long status;
 
     /**

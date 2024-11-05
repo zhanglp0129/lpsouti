@@ -5,6 +5,7 @@ import com.lpsouti.admin.service.UserService;
 import com.lpsouti.common.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class UserController {
 
     // 添加用户
     @PostMapping
-    public ResultVO<Object> add(@RequestBody UserAddDTO userAddDTO) {
+    public ResultVO<Object> add(@RequestBody @Validated UserAddDTO userAddDTO) {
         log.info("userAddDTO = {}", userAddDTO);
         userService.add(userAddDTO);
         return ResultVO.success();
