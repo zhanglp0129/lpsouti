@@ -1,13 +1,11 @@
 package com.lpsouti.admin.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 
 import java.io.Serializable;
 
@@ -19,6 +17,7 @@ public class UserAddDTO implements Serializable {
      * 头像url
      */
     @Length(max = 128)
+    @URL
     private String avatarURL;
 
     /**
@@ -26,6 +25,7 @@ public class UserAddDTO implements Serializable {
      */
     @NotEmpty
     @Length(max = 320)
+    @Email
     private String email;
 
     /**

@@ -42,3 +42,6 @@ logging:
 server:
   port: ${lpsouti.server.port:8080}
   address: ${lpsouti.server.address:0.0.0.0}
+lpsouti:
+  login:
+    expire-seconds: 86400

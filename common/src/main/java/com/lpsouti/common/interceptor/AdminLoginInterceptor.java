@@ -1,6 +1,7 @@
 package com.lpsouti.common.interceptor;
 
 import com.lpsouti.common.constant.Role;
+import com.lpsouti.common.entity.redis.LoginInfo;
 import com.lpsouti.common.mapper.UserMapper;
 import com.lpsouti.common.utils.RedisKeyUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,15 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 @Component
@@ -34,7 +33,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         log.debug("请求方式：{}，请求路径：{}", method, path);
 
         // 排除登录接口
-        if ("GET".equals(method) && "/user/login".equals(path)) {
+        if ("POST".equals(method) && "/user/login".equals(path)) {
             return true;
         }
         // 排除添加用户接口(系统无用户时)
@@ -52,20 +51,16 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         }
 
         // 查询redis
-        List<String> list = redisTemplate.<String, String>opsForHash().multiGet(
-                RedisKeyUtil.loginInfo(token),
-                RedisKeyUtil.LOGIN_INFO_ID_ROLE
-        );
-        log.debug("redis中的登录信息：{}", list);
-        String id = list.get(0);
-        String role = list.get(1);
-        if (StringUtils.isBlank(id) || StringUtils.isBlank(role)) {
+        String key = RedisKeyUtil.login(token);
+        LoginInfo loginInfo = (LoginInfo) redisTemplate.opsForValue().get(key);
+        log.debug("redis中的登录信息：{}", loginInfo);
+        if (loginInfo==null || loginInfo.getId()==null || loginInfo.getRole()==null) {
             response.setStatus(401);
             return false;
         }
 
         // 判断是否有登录权限
-        if (!role.equals("" + Role.ADMIN)) {
+        if (!loginInfo.getRole().equals(Role.ADMIN)) {
             response.setStatus(403);
             return false;
         }

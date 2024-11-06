@@ -16,7 +16,7 @@ public class RedisConfig {
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         // 设置序列化方式
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
 

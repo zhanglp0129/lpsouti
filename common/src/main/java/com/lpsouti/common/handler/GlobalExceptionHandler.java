@@ -7,10 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLException;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 @Slf4j
@@ -22,16 +24,20 @@ public class GlobalExceptionHandler {
         return processResponse(e);
     }
 
-    @ExceptionHandler({SQLException.class, DataAccessException.class})
-    public Object handleSQLException(Exception e) {
+    @ExceptionHandler(DataAccessException.class)
+    public Object handleSQLException(DataAccessException e) {
         log.info("数据库异常：{}", e.getMessage());
-        return processResponse(new CommonException(ErrorCode.SQL_ERROR_CODE, e.getMessage()));
+        String msg = e.getRootCause() != null ? e.getRootCause().getMessage() : "数据库操作失败";
+        return processResponse(new CommonException(ErrorCode.SQL_ERROR_CODE, msg));
     }
 
     @ExceptionHandler(BindException.class)
     public Object handleBindException(BindException e) {
         log.info("参数绑定异常：{}", e.getMessage());
-        return processResponse(new CommonException(ErrorCode.BIND_ERROR_CODE, e.getMessage()));
+        String msg = e.getFieldErrors().stream()
+                .map(FieldError::getDefaultMessage)
+                .collect(Collectors.joining(", "));
+        return processResponse(new CommonException(ErrorCode.BIND_ERROR_CODE, msg));
     }
 
     @ExceptionHandler(Exception.class)
