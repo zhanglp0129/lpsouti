@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @ComponentScan("com.lpsouti")
-@MapperScan("com.lpsouti.common.mapper")
+@MapperScan("com.lpsouti.admin.mapper")
 @EnableTransactionManagement
 public class AdminApplication {
     public static void main(String[] args) {

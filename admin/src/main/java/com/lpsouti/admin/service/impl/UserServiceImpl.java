@@ -1,9 +1,8 @@
 package com.lpsouti.admin.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.lpsouti.admin.dto.user.LoginDTO;
 import com.lpsouti.admin.dto.user.UserAddDTO;
 import com.lpsouti.admin.dto.user.UserEditDTO;
@@ -18,22 +17,22 @@ import com.lpsouti.common.entity.User;
 import com.lpsouti.common.entity.UserInfo;
 import com.lpsouti.common.entity.redis.LoginInfo;
 import com.lpsouti.common.exception.CommonException;
-import com.lpsouti.common.mapper.BalanceMapper;
-import com.lpsouti.common.mapper.UserInfoMapper;
-import com.lpsouti.common.mapper.UserMapper;
+import com.lpsouti.admin.mapper.BalanceMapper;
+import com.lpsouti.admin.mapper.UserInfoMapper;
+import com.lpsouti.admin.mapper.UserMapper;
 import com.lpsouti.common.properties.LoginProperties;
 import com.lpsouti.common.utils.RedisKeyUtil;
 import com.lpsouti.common.utils.SecurityUtil;
 import com.lpsouti.common.vo.PageVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -78,10 +77,10 @@ public class UserServiceImpl implements UserService {
     public LoginVO login(LoginDTO loginDTO) {
         // 查找用户。根据用户名查找，用户名为空则根据邮箱查找
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        if (!StringUtils.isEmpty(loginDTO.getUsername())) {
+        if (StrUtil.isNotBlank(loginDTO.getUsername())) {
             // 用户名登录
             wrapper.eq(User::getUsername, loginDTO.getUsername());
-        } else if (!StringUtils.isEmpty(loginDTO.getEmail())) {
+        } else if (StrUtil.isNotBlank(loginDTO.getEmail())) {
             // 邮箱登录
             wrapper.eq(User::getEmail, loginDTO.getEmail());
         } else {
@@ -100,7 +99,7 @@ public class UserServiceImpl implements UserService {
             throw new CommonException("用户名、邮箱或密码错误");
         }
         // 无登录权限
-        if (user.getRole() != Role.ADMIN) {
+        if (!Objects.equals(user.getRole(), Role.ADMIN)) {
             throw new CommonException("无登录权限");
         }
 

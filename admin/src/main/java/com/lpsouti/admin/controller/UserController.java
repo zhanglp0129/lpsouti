@@ -10,6 +10,7 @@ import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -56,7 +57,7 @@ public class UserController {
 
     // 分页查询用户
     @GetMapping("/page")
-    public ResultVO<PageVO<UserVO>> page(@ModelAttribute @Valid UserPageDTO userPageDTO) {
+    public ResultVO<PageVO<UserVO>> page(@Valid UserPageDTO userPageDTO) {
         log.info("userPageDTO = {}", userPageDTO);
         PageVO<UserVO> vo = userService.page(userPageDTO);
         return ResultVO.success(vo);

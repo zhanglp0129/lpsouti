@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpsouti.admin.mapper.QuestionMapper">
+
+    <resultMap id="BaseResultMap" type="com.lpsouti.common.entity.Question">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="type" column="type" jdbcType="TINYINT"/>
+            <result property="questionFormat" column="question_format" jdbcType="TINYINT"/>
+            <result property="questionContent" column="question_content" jdbcType="VARCHAR"/>
+            <result property="answerFormat" column="answer_format" jdbcType="TINYINT"/>
+            <result property="answerContent" column="answer_content" jdbcType="OTHER"/>
+            <result property="analysisFormat" column="analysis_format" jdbcType="TINYINT"/>
+            <result property="analysisContent" column="analysis_content" jdbcType="VARCHAR"/>
+            <result property="origin" column="origin" jdbcType="TINYINT"/>
+            <result property="uploadUserId" column="upload_user_id" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="acceptTime" column="accept_time" jdbcType="TIMESTAMP"/>
+            <result property="rewardBalance" column="reward_balance" jdbcType="DECIMAL"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,type,question_format,
+        question_content,answer_format,answer_content,
+        analysis_format,analysis_content,origin,
+        upload_user_id,status,accept_time,
+        reward_balance,create_time,update_time,
+        is_deleted
+    </sql>
+</mapper>

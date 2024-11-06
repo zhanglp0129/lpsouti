@@ -1,6 +1,6 @@
 package com.lpsouti.admin.config;
 
-import com.lpsouti.common.interceptor.AdminLoginInterceptor;
+import com.lpsouti.admin.interceptor.AdminLoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
