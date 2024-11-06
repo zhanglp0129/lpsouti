@@ -36,6 +36,10 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         if ("POST".equals(method) && "/user/login".equals(path)) {
             return true;
         }
+        // 排除判断是否存在用户接口
+        if ("GET".equals(method) && "/user/exists".equals(path)) {
+            return true;
+        }
         // 排除添加用户接口(系统无用户时)
         if ("POST".equals(method) && "/user".equals(path) && !userMapper.exists()) {
             return true;
@@ -59,7 +63,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        // 判断是否有登录权限
+        // 判断是否有管理员权限
         if (!loginInfo.getRole().equals(Role.ADMIN)) {
             response.setStatus(403);
             return false;
