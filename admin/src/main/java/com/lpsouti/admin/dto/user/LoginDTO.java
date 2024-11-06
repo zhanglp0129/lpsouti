@@ -1,4 +1,4 @@
-package com.lpsouti.admin.dto;
+package com.lpsouti.admin.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,10 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginDTO {
+public class LoginDTO implements Serializable {
     /**
      * 邮箱
      */

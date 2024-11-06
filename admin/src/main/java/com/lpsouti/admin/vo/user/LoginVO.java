@@ -1,4 +1,4 @@
-package com.lpsouti.admin.vo;
+package com.lpsouti.admin.vo.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

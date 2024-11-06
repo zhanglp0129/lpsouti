@@ -1,9 +1,10 @@
 package com.lpsouti.admin.controller;
 
-import com.lpsouti.admin.dto.LoginDTO;
-import com.lpsouti.admin.dto.UserAddDTO;
+import com.lpsouti.admin.dto.user.LoginDTO;
+import com.lpsouti.admin.dto.user.UserAddDTO;
+import com.lpsouti.admin.dto.user.UserEditDTO;
 import com.lpsouti.admin.service.UserService;
-import com.lpsouti.admin.vo.LoginVO;
+import com.lpsouti.admin.vo.user.LoginVO;
 import com.lpsouti.common.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,5 +40,13 @@ public class UserController {
     public ResultVO<Boolean> exists() {
         Boolean exists = userService.exists();
         return ResultVO.success(exists);
+    }
+
+    // 修改用户
+    @PutMapping
+    public ResultVO<Object> edit(@RequestBody @Validated UserEditDTO userEditDTO) {
+        log.info("userEditDTO = {}", userEditDTO);
+        userService.edit(userEditDTO);
+        return ResultVO.success();
     }
 }

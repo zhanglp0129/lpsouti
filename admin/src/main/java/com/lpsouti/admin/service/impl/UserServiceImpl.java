@@ -1,11 +1,14 @@
 package com.lpsouti.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.lpsouti.admin.dto.LoginDTO;
-import com.lpsouti.admin.dto.UserAddDTO;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.lpsouti.admin.dto.user.LoginDTO;
+import com.lpsouti.admin.dto.user.UserAddDTO;
+import com.lpsouti.admin.dto.user.UserEditDTO;
 import com.lpsouti.admin.service.UserService;
-import com.lpsouti.admin.vo.LoginVO;
+import com.lpsouti.admin.vo.user.LoginVO;
 import com.lpsouti.common.constant.ErrorCode;
 import com.lpsouti.common.constant.Role;
 import com.lpsouti.common.entity.Balance;
@@ -56,6 +59,9 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userAddDTO, userInfo);
         user.setPassword(encrypted);
         user.setSalt(salt);
+        log.debug("user = {}", user);
+        log.debug("userInfo = {}", userInfo);
+        log.debug("balance = {}", balance);
 
         // 插入数据
         userMapper.insert(user);
@@ -113,5 +119,32 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean exists() {
         return userMapper.exists();
+    }
+
+    @Override
+    @Transactional
+    public void edit(UserEditDTO userEditDTO) {
+        // 创建数据库实体
+        User user = new User();
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(userEditDTO, user);
+        BeanUtils.copyProperties(userEditDTO, userInfo);
+
+        if (userEditDTO.getPassword() != null) {
+            // 生成盐值
+            String salt = SecurityUtil.generateSalt();
+            // 加密密码
+            String encrypted = SecurityUtil.encryptPassword(userEditDTO.getPassword(), salt);
+            user.setPassword(encrypted);
+            user.setSalt(salt);
+        }
+        log.debug("user = {}", user);
+        log.debug("userInfo = {}", userInfo);
+
+        // 更新
+        userMapper.updateById(user);
+        LambdaUpdateWrapper<UserInfo> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.eq(UserInfo::getUserId, userEditDTO.getId());
+        userInfoMapper.update(userInfo, wrapper);
     }
 }

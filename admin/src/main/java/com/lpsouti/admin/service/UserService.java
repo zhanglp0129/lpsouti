@@ -1,8 +1,9 @@
 package com.lpsouti.admin.service;
 
-import com.lpsouti.admin.dto.LoginDTO;
-import com.lpsouti.admin.dto.UserAddDTO;
-import com.lpsouti.admin.vo.LoginVO;
+import com.lpsouti.admin.dto.user.LoginDTO;
+import com.lpsouti.admin.dto.user.UserAddDTO;
+import com.lpsouti.admin.dto.user.UserEditDTO;
+import com.lpsouti.admin.vo.user.LoginVO;
 
 public interface UserService {
 
@@ -11,4 +12,6 @@ public interface UserService {
     LoginVO login(LoginDTO loginDTO);
 
     Boolean exists();
+
+    void edit(UserEditDTO userEditDTO);
 }
