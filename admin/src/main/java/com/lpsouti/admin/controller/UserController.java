@@ -9,6 +9,7 @@ import com.lpsouti.admin.vo.user.LoginVO;
 import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -18,14 +19,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 @Slf4j
 @RequiredArgsConstructor
-@Validated
 public class UserController {
 
     private final UserService userService;
 
     // 添加用户
     @PostMapping
-    public ResultVO<Object> add(@RequestBody UserAddDTO userAddDTO) {
+    public ResultVO<Object> add(@RequestBody @Valid UserAddDTO userAddDTO) {
         log.info("userAddDTO = {}", userAddDTO);
         userService.add(userAddDTO);
         return ResultVO.success();
@@ -33,7 +33,7 @@ public class UserController {
 
     // 登录
     @PostMapping("/login")
-    public ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO) {
+    public ResultVO<LoginVO> login(@RequestBody @Valid LoginDTO loginDTO) {
         log.info("loginDTO = {}", loginDTO);
         LoginVO loginVO = userService.login(loginDTO);
         return ResultVO.success(loginVO);
@@ -48,7 +48,7 @@ public class UserController {
 
     // 修改用户
     @PutMapping
-    public ResultVO<Object> edit(@RequestBody UserEditDTO userEditDTO) {
+    public ResultVO<Object> edit(@RequestBody @Valid UserEditDTO userEditDTO) {
         log.info("userEditDTO = {}", userEditDTO);
         userService.edit(userEditDTO);
         return ResultVO.success();
@@ -56,7 +56,7 @@ public class UserController {
 
     // 分页查询用户
     @GetMapping("/page")
-    public ResultVO<PageVO<UserVO>> page(@ModelAttribute UserPageDTO userPageDTO) {
+    public ResultVO<PageVO<UserVO>> page(@ModelAttribute @Valid UserPageDTO userPageDTO) {
         log.info("userPageDTO = {}", userPageDTO);
         PageVO<UserVO> vo = userService.page(userPageDTO);
         return ResultVO.success(vo);
