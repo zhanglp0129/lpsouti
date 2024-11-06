@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -27,12 +28,12 @@ public class Balance implements Serializable {
     /**
      * 余额。单位为元
      */
-    private Integer balance;
+    private BigDecimal balance;
 
     /**
      * 免费接口余额。每日0点刷新，时区为北京时间
      */
-    private Integer freeBalance;
+    private BigDecimal freeBalance;
 
     /**
      * 上次刷新免费接口余额的日期

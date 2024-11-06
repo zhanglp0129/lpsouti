@@ -7,8 +7,10 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.lpsouti.admin.dto.user.LoginDTO;
 import com.lpsouti.admin.dto.user.UserAddDTO;
 import com.lpsouti.admin.dto.user.UserEditDTO;
+import com.lpsouti.admin.dto.user.UserPageDTO;
 import com.lpsouti.admin.service.UserService;
 import com.lpsouti.admin.vo.user.LoginVO;
+import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.constant.ErrorCode;
 import com.lpsouti.common.constant.Role;
 import com.lpsouti.common.entity.Balance;
@@ -22,6 +24,7 @@ import com.lpsouti.common.mapper.UserMapper;
 import com.lpsouti.common.properties.LoginProperties;
 import com.lpsouti.common.utils.RedisKeyUtil;
 import com.lpsouti.common.utils.SecurityUtil;
+import com.lpsouti.common.vo.PageVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -146,5 +149,10 @@ public class UserServiceImpl implements UserService {
         LambdaUpdateWrapper<UserInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(UserInfo::getUserId, userEditDTO.getId());
         userInfoMapper.update(userInfo, wrapper);
+    }
+
+    @Override
+    public PageVO<UserVO> page(UserPageDTO userPageDTO) {
+        return null;
     }
 }

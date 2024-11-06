@@ -3,7 +3,10 @@ package com.lpsouti.admin.service;
 import com.lpsouti.admin.dto.user.LoginDTO;
 import com.lpsouti.admin.dto.user.UserAddDTO;
 import com.lpsouti.admin.dto.user.UserEditDTO;
+import com.lpsouti.admin.dto.user.UserPageDTO;
 import com.lpsouti.admin.vo.user.LoginVO;
+import com.lpsouti.admin.vo.user.UserVO;
+import com.lpsouti.common.vo.PageVO;
 
 public interface UserService {
 
@@ -14,4 +17,6 @@ public interface UserService {
     Boolean exists();
 
     void edit(UserEditDTO userEditDTO);
+
+    PageVO<UserVO> page(UserPageDTO userPageDTO);
 }

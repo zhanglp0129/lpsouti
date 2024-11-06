@@ -32,6 +32,7 @@ mybatis-plus:
       logic-delete-field: isDeleted
       logic-delete-value: 1
       logic-not-delete-value: 0
+    banner: false
 logging:
   file:
     name: ${lpsouti.log.filename:logs/admin.log}
