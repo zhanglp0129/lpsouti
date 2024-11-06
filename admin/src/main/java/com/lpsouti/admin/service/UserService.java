@@ -9,4 +9,6 @@ public interface UserService {
     void add(UserAddDTO userAddDTO);
 
     LoginVO login(LoginDTO loginDTO);
+
+    Boolean exists();
 }

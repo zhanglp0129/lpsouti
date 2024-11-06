@@ -109,4 +109,9 @@ public class UserServiceImpl implements UserService {
         // 写入redis重试次数过多，抛出系统异常
         throw new RuntimeException("登陆失败：系统错误，请联系管理员");
     }
+
+    @Override
+    public Boolean exists() {
+        return userMapper.exists();
+    }
 }

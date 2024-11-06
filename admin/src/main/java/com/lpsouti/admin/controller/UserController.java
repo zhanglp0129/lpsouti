@@ -8,10 +8,7 @@ import com.lpsouti.common.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -35,5 +32,12 @@ public class UserController {
         log.info("loginDTO = {}", loginDTO);
         LoginVO loginVO = userService.login(loginDTO);
         return ResultVO.success(loginVO);
+    }
+
+    // 判断系统中是否存在用户
+    @GetMapping("/exists")
+    public ResultVO<Boolean> exists() {
+        Boolean exists = userService.exists();
+        return ResultVO.success(exists);
     }
 }
