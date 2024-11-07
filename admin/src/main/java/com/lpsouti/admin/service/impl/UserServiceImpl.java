@@ -166,7 +166,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO queryById(Long id) {
-        return userMapper.queryById(id);
+        UserVO vo = userMapper.queryById(id);
+        if (vo==null) {
+            throw new CommonException("该用户不存在");
+        }
+        return vo;
     }
 
     @Override
@@ -176,9 +180,34 @@ public class UserServiceImpl implements UserService {
         user.setId(id);
         user.setStatus(status);
         // 修改数据
-        userMapper.updateById(user);
+        int rows = userMapper.updateById(user);
+        if (rows == 0) {
+            throw new CommonException("修改用户状态失败");
+        }
 
         if (UserStatus.BANNED.equals(status) && offline) {
+            // TODO 强制下线：删除redis中所有该用户的登录token
+        }
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id, Boolean offline) {
+        // 构造删除条件
+        LambdaQueryWrapper<UserInfo> infoWrapper = new LambdaQueryWrapper<>();
+        infoWrapper.eq(UserInfo::getUserId, id);
+        LambdaQueryWrapper<Balance> balanceWrapper = new LambdaQueryWrapper<>();
+        balanceWrapper.eq(Balance::getUserId, id);
+        // 删除数据
+        int rows = userMapper.deleteById(id);
+        rows += userInfoMapper.delete(infoWrapper);
+        rows += balanceMapper.delete(balanceWrapper);
+        // 没有删除数据
+        if (rows == 0) {
+            throw new CommonException("删除用户失败");
+        }
+
+        if (offline) {
             // TODO 强制下线：删除redis中所有该用户的登录token
         }
     }

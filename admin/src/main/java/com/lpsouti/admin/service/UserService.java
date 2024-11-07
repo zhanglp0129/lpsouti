@@ -23,4 +23,6 @@ public interface UserService {
     UserVO queryById(Long id);
 
     void editStatus(Long id, Byte status, Boolean offline);
+
+    void delete(Long id, Boolean offline);
 }

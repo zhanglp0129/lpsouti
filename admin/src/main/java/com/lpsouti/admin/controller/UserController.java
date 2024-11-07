@@ -78,4 +78,11 @@ public class UserController {
         userService.editStatus(id, status, offline);
         return ResultVO.success();
     }
+
+    @DeleteMapping("/{id}")
+    public ResultVO<Void> delete(@PathVariable("id") Long id, @RequestParam(required = false, defaultValue = "true") Boolean offline) {
+        log.info("id = {}, offline = {}", id, offline);
+        userService.delete(id, offline);
+        return ResultVO.success();
+    }
 }
