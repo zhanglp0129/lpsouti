@@ -10,6 +10,7 @@ import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class UserController {
 
     // 添加用户
     @PostMapping
-    public ResultVO<Object> add(@RequestBody @Valid UserAddDTO userAddDTO) {
+    public ResultVO<Void> add(@RequestBody @Valid UserAddDTO userAddDTO) {
         log.info("userAddDTO = {}", userAddDTO);
         userService.add(userAddDTO);
         return ResultVO.success();
@@ -47,7 +48,7 @@ public class UserController {
 
     // 修改用户
     @PutMapping
-    public ResultVO<Object> edit(@RequestBody @Valid UserEditDTO userEditDTO) {
+    public ResultVO<Void> edit(@RequestBody @Valid UserEditDTO userEditDTO) {
         log.info("userEditDTO = {}", userEditDTO);
         userService.edit(userEditDTO);
         return ResultVO.success();
@@ -67,5 +68,14 @@ public class UserController {
         log.info("id = {}", id);
         UserVO vo = userService.queryById(id);
         return ResultVO.success(vo);
+    }
+
+    // 修改用户状态
+    @PatchMapping("/status/{id}")
+    public ResultVO<Void> editStatus(@PathVariable("id") Long id, @NotNull Byte status,
+                                     @RequestParam(required = false, defaultValue = "true") Boolean offline) {
+        log.info("id = {}, status = {}, offline = {}", id, status, offline);
+        userService.editStatus(id, status, offline);
+        return ResultVO.success();
     }
 }

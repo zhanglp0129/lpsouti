@@ -16,15 +16,15 @@ public class ResultVO<T> {
         return new ResultVO<>(1000, data, null);
     }
 
-    public static ResultVO<Object> success() {
+    public static ResultVO<Void> success() {
         return new ResultVO<>(1000, null, null);
     }
 
-    public static ResultVO<Object> error(String msg) {
+    public static ResultVO<Void> error(String msg) {
         return new ResultVO<>(2000, null, msg);
     }
 
-    public static ResultVO<Object> error(int code, String msg) {
+    public static ResultVO<Void> error(int code, String msg) {
         return new ResultVO<>(code, null, msg);
     }
 }

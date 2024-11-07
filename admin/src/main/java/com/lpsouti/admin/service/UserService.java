@@ -21,4 +21,6 @@ public interface UserService {
     PageVO<UserVO> pageQuery(UserPageDTO userPageDTO);
 
     UserVO queryById(Long id);
+
+    void editStatus(Long id, Byte status, Boolean offline);
 }

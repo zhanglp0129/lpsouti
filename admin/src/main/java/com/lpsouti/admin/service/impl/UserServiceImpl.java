@@ -16,6 +16,7 @@ import com.lpsouti.admin.vo.user.LoginVO;
 import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.constant.ErrorCode;
 import com.lpsouti.common.constant.Role;
+import com.lpsouti.common.constant.UserStatus;
 import com.lpsouti.common.entity.Balance;
 import com.lpsouti.common.entity.User;
 import com.lpsouti.common.entity.UserInfo;
@@ -166,5 +167,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO queryById(Long id) {
         return userMapper.queryById(id);
+    }
+
+    @Override
+    public void editStatus(Long id, Byte status, Boolean offline) {
+        // 构造修改实体
+        User user = new User();
+        user.setId(id);
+        user.setStatus(status);
+        // 修改数据
+        userMapper.updateById(user);
+
+        if (UserStatus.BANNED.equals(status) && offline) {
+            // TODO 强制下线：删除redis中所有该用户的登录token
+        }
     }
 }
