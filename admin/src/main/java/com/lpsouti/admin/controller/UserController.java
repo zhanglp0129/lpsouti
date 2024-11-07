@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -95,5 +96,13 @@ public class UserController {
         log.info("id = {}, balance = {}, freeBalance = {}", id, balance, freeBalance);
         userService.editBalance(id, balance, freeBalance);
         return ResultVO.success();
+    }
+
+    // 批量查找用户
+    @GetMapping("/batch")
+    public ResultVO<List<UserVO>> queryBatch(@RequestParam List<Long> ids) {
+        log.info("ids = {}", ids);
+        List<UserVO> vos = userService.queryBatch(ids);
+        return ResultVO.success(vos);
     }
 }

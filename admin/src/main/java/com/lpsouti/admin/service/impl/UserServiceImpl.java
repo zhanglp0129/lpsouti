@@ -35,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -225,5 +226,12 @@ public class UserServiceImpl implements UserService {
         if (rows==0) {
             throw new CommonException("修改余额失败");
         }
+    }
+
+    @Override
+    public List<UserVO> queryBatch(List<Long> ids) {
+        List<UserVO> vos = userMapper.queryBatch(ids);
+        log.debug("user batch query vo = {}", vos);
+        return vos;
     }
 }

@@ -8,6 +8,8 @@ import com.lpsouti.common.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
 * @author zhanglp0129
 * @description 针对表【users(用户表)】的数据库操作Mapper
@@ -25,6 +27,8 @@ public interface UserMapper extends BaseMapper<User> {
 
     // 根据id查找用户
     UserVO queryById(Long id);
+
+    List<UserVO> queryBatch(List<Long> ids);
 }
 
 

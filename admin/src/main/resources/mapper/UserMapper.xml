@@ -98,4 +98,18 @@
         </where>
         limit 1
     </select>
+    <!--批量查找用户-->
+    <select id="queryBatch" resultMap="UserQueryResultMap">
+        select <include refid="UserQueryColumns"/>
+        from users as user
+        left join user_info as info on user.id = info.user_id
+        left join balances as balance on user.id = balance.user_id
+        <where>
+            user.is_deleted=0 and info.is_deleted=0 and balance.is_deleted=0
+            and user.id in
+            <foreach collection="ids" open="(" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
 </mapper>
