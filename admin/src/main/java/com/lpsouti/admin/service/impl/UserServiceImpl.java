@@ -3,6 +3,7 @@ package com.lpsouti.admin.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.lpsouti.admin.dto.user.LoginDTO;
 import com.lpsouti.admin.dto.user.UserAddDTO;
 import com.lpsouti.admin.dto.user.UserEditDTO;
@@ -151,7 +152,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageVO<UserVO> page(UserPageDTO userPageDTO) {
-        return null;
+    public PageVO<UserVO> pageQuery(UserPageDTO dto) {
+        // 分页查询
+        IPage<UserVO> page = dto.toIPage(dto.getOrderBy());
+        page = userMapper.pageQuery(page, dto);
+
+        // 封装返回结果
+        PageVO<UserVO> vo = PageVO.fromIPage(page);
+        log.debug("user page vo = {}", vo);
+        return vo;
     }
 }

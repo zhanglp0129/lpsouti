@@ -4,23 +4,86 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lpsouti.admin.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.lpsouti.common.entity.User">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="username" column="username" jdbcType="VARCHAR"/>
-            <result property="email" column="email" jdbcType="VARCHAR"/>
-            <result property="password" column="password" jdbcType="CHAR"/>
-            <result property="salt" column="salt" jdbcType="VARCHAR"/>
-            <result property="role" column="role" jdbcType="TINYINT"/>
-            <result property="status" column="status" jdbcType="TINYINT"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="isDeleted" column="is_deleted" jdbcType="BIT"/>
+    <!--用户查找的列-->
+    <sql id="UserQueryColumns">
+        <!--用户数据-->
+        user.id as "user.id",
+        user.username as "user.username",
+        user.email as "user.email",
+        user.role as "user.role",
+        user.status as "user.status",
+        user.create_time as "user.create_time",
+        user.update_time as "user.update_time",
+        user.is_deleted as "user.is_deleted",
+        <!--用户信息数据-->
+        info.id as "info.id",
+        info.user_id as "info.user_id",
+        info.nickname as "info.nickname",
+        info.avatar_url as "info.avatar_url",
+        info.create_time as "info.create_time",
+        info.update_time as "info.update_time",
+        info.is_deleted as "info.is_deleted",
+        <!--用户余额数据-->
+        balance.id as "balance.id",
+        balance.user_id as "balance.user_id",
+        balance.balance as "balance.balance",
+        balance.free_balance as "balance.free_balance",
+        balance.refresh_date as "balance.refresh_date",
+        balance.create_time as "balance.create_time",
+        balance.update_time as "balance.update_time",
+        balance.is_deleted as "balance.is_deleted"
+    </sql>
+    <!--用户查找的结果映射-->
+    <resultMap id="UserQueryResultMap" type="com.lpsouti.admin.vo.user.UserVO">
+        <id property="id" column="user.id" />
+        <result property="username" column="user.username" />
+        <result property="email" column="user.email" />
+        <result property="role" column="user.role" />
+        <result property="status" column="user.status" />
+        <result property="createTime" column="user.create_time" />
+        <result property="updateTime" column="user.update_time" />
+        <result property="isDeleted" column="user.is_deleted" />
+
+        <!-- 嵌套 UserInfo 映射 -->
+        <association property="info" javaType="com.lpsouti.common.entity.UserInfo">
+            <id property="id" column="info.id" />
+            <result property="userId" column="info.user_id" />
+            <result property="nickname" column="info.nickname" />
+            <result property="avatarUrl" column="info.avatar_url" />
+            <result property="createTime" column="info.create_time" />
+            <result property="updateTime" column="info.update_time" />
+            <result property="isDeleted" column="info.is_deleted" />
+        </association>
+
+        <!-- 嵌套 Balance 映射 -->
+        <association property="balance" javaType="com.lpsouti.common.entity.Balance">
+            <id property="id" column="balance.id" />
+            <result property="userId" column="balance.user_id" />
+            <result property="balance" column="balance.balance" />
+            <result property="freeBalance" column="balance.free_balance" />
+            <result property="refreshDate" column="balance.refresh_date" />
+            <result property="createTime" column="balance.create_time" />
+            <result property="updateTime" column="balance.update_time" />
+            <result property="isDeleted" column="balance.is_deleted" />
+        </association>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,username,email,
-        password,salt,role,
-        status,create_time,update_time,
-        is_deleted
-    </sql>
+    <!--分页查找-->
+    <select id="pageQuery" resultMap="UserQueryResultMap">
+        select <include refid="UserQueryColumns"/>
+            from users as user
+            left join user_info as info on user.id = info.user_id
+            left join balances as balance on user.id = balance.user_id
+        <where>
+            user.is_deleted=0 and info.is_deleted=0 and balance.is_deleted=0
+            <if test="dto.role != null">and user.role = #{dto.role}</if>
+            <if test="dto.status != null">and user.status = #{dto.status}</if>
+            <if test="dto.balanceFrom != null">and balance.balance >= #{dto.balanceFrom}</if>
+            <if test="dto.balanceTo != null">and balance.balance &lt;= #{dto.balanceTo}</if>
+            <if test="dto.freeBalanceFrom != null">and balance.free_balance >= #{dto.freeBalanceFrom}</if>
+            <if test="dto.freeBalanceTo != null">and balance.free_balance &lt;= #{dto.freeBalanceTo}</if>
+            <if test="dto.createTimeFrom != null">and user.create_time >= #{dto.createTimeFrom}</if>
+            <if test="dto.createTimeTo != null">and user.create_time &lt;= #{dto.createTimeTo}</if>
+        </where>
+    </select>
 </mapper>

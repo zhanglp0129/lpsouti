@@ -8,10 +8,6 @@ spring:
     url: ${lpsouti.database.url}
     username: ${lpsouti.database.username}
     password: ${lpsouti.database.password}
-  jackson:
-    default-property-inclusion: non_null
-    date-format: "yyyy-MM-dd HH:mm:ss"
-    time-zone: Asia/Shanghai
   data:
     redis:
       host: ${lpsouti.redis.host:localhost}
@@ -38,6 +34,7 @@ logging:
     name: ${lpsouti.log.filename:logs/admin.log}
   level:
     com.lpsouti: ${lpsouti.log.level:info}
+    com.baomidou.mybatisplus.core.mapper: ${lpsouti.log.level:info}
   pattern:
     dateformat: "yyyy-MM-dd HH:mm:ss.SSS"
 server:

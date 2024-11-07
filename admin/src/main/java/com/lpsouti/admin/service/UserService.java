@@ -18,5 +18,5 @@ public interface UserService {
 
     void edit(UserEditDTO userEditDTO);
 
-    PageVO<UserVO> page(UserPageDTO userPageDTO);
+    PageVO<UserVO> pageQuery(UserPageDTO userPageDTO);
 }

@@ -47,14 +47,14 @@ public class UserAddDTO implements Serializable {
     @NotNull
     @Min(1)
     @Max(2)
-    private Integer role;
+    private Byte role;
 
     /**
      * 用户状态，1正常 2封禁
      */
     @Min(1)
     @Max(2)
-    private Integer status = 1;
+    private Byte status = 1;
 
     /**
      * 用户名

@@ -4,19 +4,4 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lpsouti.admin.mapper.NoticeMapper">
 
-    <resultMap id="BaseResultMap" type="com.lpsouti.common.entity.Notice">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="isShown" column="is_shown" jdbcType="BIT"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="isDeleted" column="is_deleted" jdbcType="BIT"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id,title,content,
-        is_shown,create_time,update_time,
-        is_deleted
-    </sql>
 </mapper>

@@ -6,6 +6,8 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Slf4j
 @Component
 public class OrderFieldValidator implements ConstraintValidator<OrderFieldEnum, String> {
@@ -14,8 +16,8 @@ public class OrderFieldValidator implements ConstraintValidator<OrderFieldEnum, 
 
     @Override
     public void initialize(OrderFieldEnum constraintAnnotation) {
-        log.debug("available order fields = {}", (Object) fields);
         fields = constraintAnnotation.value();
+        log.debug("available order fields = {}", Arrays.toString(fields));
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.lpsouti.common.handler;
 
-import com.lpsouti.common.constant.ErrorCode;
 import com.lpsouti.common.exception.CommonException;
 import com.lpsouti.common.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +12,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.stream.Collectors;
+
+import static com.lpsouti.common.constant.ErrorCode.BIND_ERROR_CODE;
+import static com.lpsouti.common.constant.ErrorCode.SQL_ERROR_CODE;
 
 @RestControllerAdvice
 @Slf4j
@@ -28,7 +30,7 @@ public class GlobalExceptionHandler {
     public Object handleSQLException(DataAccessException e) {
         log.info("数据库异常：{}", e.getMessage());
         String msg = e.getRootCause() != null ? e.getRootCause().getMessage() : "数据库操作失败";
-        return processResponse(new CommonException(ErrorCode.SQL_ERROR_CODE, msg));
+        return processResponse(new CommonException(SQL_ERROR_CODE, msg));
     }
 
     @ExceptionHandler(BindException.class)
@@ -37,14 +39,14 @@ public class GlobalExceptionHandler {
         String msg = e.getFieldErrors().stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining(", "));
-        return processResponse(new CommonException(ErrorCode.BIND_ERROR_CODE, msg));
+        return processResponse(new CommonException(BIND_ERROR_CODE, msg));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Object handleBindException(HttpMessageNotReadableException e) {
         log.info("请求体格式错误：{}", e.getMessage());
         String msg = e.getCause() != null ? e.getCause().getMessage() : "请求体格式错误";
-        return processResponse(new CommonException(ErrorCode.BIND_ERROR_CODE, msg));
+        return processResponse(new CommonException(BIND_ERROR_CODE, msg));
     }
 
     @ExceptionHandler(Exception.class)

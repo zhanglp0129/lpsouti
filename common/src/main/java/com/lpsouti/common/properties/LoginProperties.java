@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "lpsouti.login")
 @Data
 public class LoginProperties {
-    private long expireSeconds;
+    private Long expireSeconds;
 }

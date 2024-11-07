@@ -1,7 +1,11 @@
 package com.lpsouti.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.lpsouti.admin.dto.user.UserPageDTO;
+import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -17,7 +21,7 @@ public interface UserMapper extends BaseMapper<User> {
     boolean exists();
 
     // 用户的条件分页查询
-
+    IPage<UserVO> pageQuery(@Param("page") IPage<UserVO> page, @Param("dto") UserPageDTO dto);
 }
 
 

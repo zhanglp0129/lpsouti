@@ -53,14 +53,14 @@ public class UserEditDTO implements Serializable {
      */
     @Min(1)
     @Max(2)
-    private Integer role;
+    private Byte role;
 
     /**
      * 用户状态，1正常 2封禁
      */
     @Min(1)
     @Max(2)
-    private Integer status;
+    private Byte status;
 
     /**
      * 用户名

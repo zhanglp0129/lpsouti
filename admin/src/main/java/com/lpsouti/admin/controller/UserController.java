@@ -57,7 +57,7 @@ public class UserController {
     @GetMapping("/page")
     public ResultVO<PageVO<UserVO>> page(@Valid UserPageDTO userPageDTO) {
         log.info("userPageDTO = {}", userPageDTO);
-        PageVO<UserVO> vo = userService.page(userPageDTO);
+        PageVO<UserVO> vo = userService.pageQuery(userPageDTO);
         return ResultVO.success(vo);
     }
 }
