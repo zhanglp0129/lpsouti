@@ -86,4 +86,16 @@
             <if test="dto.createTimeTo != null">and user.create_time &lt;= #{dto.createTimeTo}</if>
         </where>
     </select>
+    <!--根据id查找-->
+    <select id="queryById" resultMap="UserQueryResultMap">
+        select <include refid="UserQueryColumns"/>
+        from users as user
+        left join user_info as info on user.id = info.user_id
+        left join balances as balance on user.id = balance.user_id
+        <where>
+            user.is_deleted=0 and info.is_deleted=0 and balance.is_deleted=0
+            and user.id = #{id}
+        </where>
+        limit 1
+    </select>
 </mapper>

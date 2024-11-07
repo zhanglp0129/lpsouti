@@ -60,4 +60,12 @@ public class UserController {
         PageVO<UserVO> vo = userService.pageQuery(userPageDTO);
         return ResultVO.success(vo);
     }
+
+    // 根据id查询用户
+    @GetMapping("/{id}")
+    public ResultVO<UserVO> queryById(@PathVariable("id") Long id) {
+        log.info("id = {}", id);
+        UserVO vo = userService.queryById(id);
+        return ResultVO.success(vo);
+    }
 }

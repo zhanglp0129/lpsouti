@@ -19,4 +19,6 @@ public interface UserService {
     void edit(UserEditDTO userEditDTO);
 
     PageVO<UserVO> pageQuery(UserPageDTO userPageDTO);
+
+    UserVO queryById(Long id);
 }

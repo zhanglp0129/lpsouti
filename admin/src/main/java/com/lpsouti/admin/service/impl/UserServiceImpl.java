@@ -162,4 +162,9 @@ public class UserServiceImpl implements UserService {
         log.debug("user page vo = {}", vo);
         return vo;
     }
+
+    @Override
+    public UserVO queryById(Long id) {
+        return userMapper.queryById(id);
+    }
 }

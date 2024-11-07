@@ -22,6 +22,9 @@ public interface UserMapper extends BaseMapper<User> {
 
     // 用户的条件分页查询
     IPage<UserVO> pageQuery(@Param("page") IPage<UserVO> page, @Param("dto") UserPageDTO dto);
+
+    // 根据id查找用户
+    UserVO queryById(Long id);
 }
 
 
