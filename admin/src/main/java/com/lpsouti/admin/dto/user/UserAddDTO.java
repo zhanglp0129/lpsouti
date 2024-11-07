@@ -35,10 +35,10 @@ public class UserAddDTO implements Serializable {
     private String nickname;
 
     /**
-     * 密码，明文
+     * 密码，明文，仅能由字母，数字，特殊符号组成，长度为8-16位
      */
     @NotEmpty
-    @Length(min = 8, max = 16)
+    @Pattern(regexp = "\\S{8,16}")
     private String password;
 
     /**
@@ -57,9 +57,9 @@ public class UserAddDTO implements Serializable {
     private Byte status = 1;
 
     /**
-     * 用户名
+     * 用户名，仅能由小写字母，数字和下划线组成，必须以小写字母开头，长度为4-30
      */
     @NotEmpty
-    @Length(min = 4, max = 30)
+    @Pattern(regexp = "[a-z][a-z0-9_]{3,29}")
     private String username;
 }
