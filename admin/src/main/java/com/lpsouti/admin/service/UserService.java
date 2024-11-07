@@ -8,6 +8,8 @@ import com.lpsouti.admin.vo.user.LoginVO;
 import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.vo.PageVO;
 
+import java.math.BigDecimal;
+
 public interface UserService {
 
     void add(UserAddDTO userAddDTO);
@@ -25,4 +27,6 @@ public interface UserService {
     void editStatus(Long id, Byte status, Boolean offline);
 
     void delete(Long id, Boolean offline);
+
+    void editBalance(Long id, BigDecimal balance, BigDecimal freeBalance);
 }

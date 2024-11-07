@@ -33,6 +33,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -209,6 +210,20 @@ public class UserServiceImpl implements UserService {
 
         if (offline) {
             // TODO 强制下线：删除redis中所有该用户的登录token
+        }
+    }
+
+    @Override
+    public void editBalance(Long id, BigDecimal balance, BigDecimal freeBalance) {
+        // 构造修改条件
+        LambdaUpdateWrapper<Balance> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.eq(Balance::getUserId, id)
+                .set(balance!=null, Balance::getBalance, balance)
+                .set(freeBalance!=null, Balance::getFreeBalance, freeBalance);
+        // 修改数据
+        int rows = balanceMapper.update(wrapper);
+        if (rows==0) {
+            throw new CommonException("修改余额失败");
         }
     }
 }

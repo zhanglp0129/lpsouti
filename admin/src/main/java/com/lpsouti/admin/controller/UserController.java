@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/user")
 @Slf4j
@@ -79,10 +81,19 @@ public class UserController {
         return ResultVO.success();
     }
 
+    // 删除用户
     @DeleteMapping("/{id}")
     public ResultVO<Void> delete(@PathVariable("id") Long id, @RequestParam(required = false, defaultValue = "true") Boolean offline) {
         log.info("id = {}, offline = {}", id, offline);
         userService.delete(id, offline);
+        return ResultVO.success();
+    }
+
+    // 修改用户余额
+    @PatchMapping("/balance/{id}")
+    public ResultVO<Void> editBalance(@PathVariable("id") Long id, BigDecimal balance, BigDecimal freeBalance) {
+        log.info("id = {}, balance = {}, freeBalance = {}", id, balance, freeBalance);
+        userService.editBalance(id, balance, freeBalance);
         return ResultVO.success();
     }
 }
