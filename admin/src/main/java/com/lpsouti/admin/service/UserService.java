@@ -7,7 +7,6 @@ import com.lpsouti.admin.dto.user.UserPageDTO;
 import com.lpsouti.admin.vo.user.LoginVO;
 import com.lpsouti.admin.vo.user.UserVO;
 import com.lpsouti.common.vo.PageVO;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.util.List;

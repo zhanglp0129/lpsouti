@@ -25,6 +25,7 @@ import com.lpsouti.common.entity.UserInfo;
 import com.lpsouti.common.entity.redis.LoginInfo;
 import com.lpsouti.common.exception.CommonException;
 import com.lpsouti.common.properties.LoginProperties;
+import com.lpsouti.common.utils.LoginUtil;
 import com.lpsouti.common.utils.RedisKeyUtil;
 import com.lpsouti.common.utils.SecurityUtil;
 import com.lpsouti.common.vo.PageVO;
@@ -52,6 +53,7 @@ public class UserServiceImpl implements UserService {
     private final LoginRecordMapper loginRecordMapper;
     private final RedisTemplate<String, Object> redisTemplate;
     private final LoginProperties loginProperties;
+    private final LoginUtil loginUtil;
 
     @Override
     @Transactional
@@ -189,6 +191,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void editStatus(Long id, Byte status, Boolean offline) {
         // 构造修改实体
         User user = new User();
@@ -201,7 +204,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (UserStatus.BANNED.equals(status) && offline) {
-            // TODO 强制下线：删除redis中所有该用户的登录token
+            loginUtil.forceOfflineByUserId(id, loginRecordMapper);
         }
     }
 
@@ -223,7 +226,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (offline) {
-            // TODO 强制下线：删除redis中所有该用户的登录token
+            loginUtil.forceOfflineByUserId(id, loginRecordMapper);
         }
     }
 
