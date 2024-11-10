@@ -49,6 +49,11 @@ public class LoginRecord implements Serializable {
     private LocalDateTime expireTime;
 
     /**
+     * 是否下线
+     */
+    private Boolean isOffline;
+
+    /**
      * 登录角色。1管理员 2普通用户
      */
     private Byte role;

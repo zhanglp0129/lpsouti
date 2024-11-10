@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public LoginVO login(LoginDTO loginDTO, String userAgent, String ip) {
         // 查找用户。根据用户名查找，用户名为空则根据邮箱查找
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
@@ -111,29 +112,27 @@ public class UserServiceImpl implements UserService {
             throw new CommonException("无登录权限");
         }
 
-        // 将token写入redis，重复则重试
-        for (int i=0;i<3;i++) {
-            String token = SecurityUtil.generateLoginToken(user.getId());
-            String key = RedisKeyUtil.login(token);
-            LoginInfo loginInfo = new LoginInfo(user.getId(), Role.ADMIN);
-            Boolean success = redisTemplate.opsForValue().setIfAbsent(key, loginInfo, Duration.ofSeconds(loginProperties.getExpireSeconds()));
-            if (Boolean.TRUE.equals(success)) {
-                // 创建登录记录对象
-                LoginRecord loginRecord = new LoginRecord();
-                loginRecord.setUserId(user.getId());
-                loginRecord.setToken(token);
-                loginRecord.setIp(ip);
-                loginRecord.setUserAgent(userAgent);
-                loginRecord.setRole(Role.ADMIN);
-                loginRecord.setExpireTime(LocalDateTime.now().plusSeconds(loginProperties.getExpireSeconds()));
-                log.debug("login record = {}", loginRecord);
-                // 添加一条登录记录
-                loginRecordMapper.insert(loginRecord);
-                return new LoginVO(user.getId(), token);
-            }
-        }
-        // 写入redis重试次数过多，抛出系统异常
-        throw new RuntimeException("登陆失败：系统错误，请联系管理员");
+        // 生成token
+        String token = SecurityUtil.generateLoginToken(user.getId());
+        // 将登录记录插入数据库，创建登录记录对象
+        LoginRecord loginRecord = new LoginRecord();
+        loginRecord.setUserId(user.getId());
+        loginRecord.setToken(token);
+        loginRecord.setIp(ip);
+        loginRecord.setUserAgent(userAgent);
+        loginRecord.setRole(Role.ADMIN);
+        loginRecord.setExpireTime(LocalDateTime.now().plusSeconds(loginProperties.getExpireSeconds()));
+        log.debug("login record = {}", loginRecord);
+        // 添加一条登录记录
+        loginRecordMapper.insert(loginRecord);
+        // 将token写入redis，生成redis key
+        String key = RedisKeyUtil.login(token);
+        // 创建登录token的redis实体对象
+        LoginInfo loginInfo = new LoginInfo(user.getId(), Role.ADMIN);
+        // 写入redis
+        redisTemplate.opsForValue().setIfAbsent(key, loginInfo, Duration.ofSeconds(loginProperties.getExpireSeconds()));
+
+        return new LoginVO(user.getId(), token);
     }
 
     @Override
