@@ -16,7 +16,7 @@ public interface UserService {
 
     void add(UserAddDTO userAddDTO);
 
-    LoginVO login(LoginDTO loginDTO);
+    LoginVO login(LoginDTO loginDTO, String userAgent, String ip);
 
     Boolean exists();
 

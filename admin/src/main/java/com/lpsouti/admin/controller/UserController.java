@@ -7,8 +7,10 @@ import com.lpsouti.admin.dto.user.UserPageDTO;
 import com.lpsouti.admin.service.UserService;
 import com.lpsouti.admin.vo.user.LoginVO;
 import com.lpsouti.admin.vo.user.UserVO;
+import com.lpsouti.common.utils.IpUtil;
 import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +38,13 @@ public class UserController {
 
     // 登录
     @PostMapping("/login")
-    public ResultVO<LoginVO> login(@RequestBody @Valid LoginDTO loginDTO) {
-        log.info("loginDTO = {}", loginDTO);
-        LoginVO loginVO = userService.login(loginDTO);
+    public ResultVO<LoginVO> login(@RequestBody @Valid LoginDTO loginDTO,
+                                   @RequestHeader(value = "User-Agent") @NotNull String userAgent,
+                                   HttpServletRequest request) {
+        // 获取ip地址
+        String ip = IpUtil.getIpAddr(request);
+        log.info("loginDTO = {}, user agent = {}, ip = {}", loginDTO, userAgent, ip);
+        LoginVO loginVO = userService.login(loginDTO, userAgent, ip);
         return ResultVO.success(loginVO);
     }
 

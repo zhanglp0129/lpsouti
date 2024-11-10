@@ -9,6 +9,7 @@ import com.lpsouti.admin.dto.user.UserAddDTO;
 import com.lpsouti.admin.dto.user.UserEditDTO;
 import com.lpsouti.admin.dto.user.UserPageDTO;
 import com.lpsouti.admin.mapper.BalanceMapper;
+import com.lpsouti.admin.mapper.LoginRecordMapper;
 import com.lpsouti.admin.mapper.UserInfoMapper;
 import com.lpsouti.admin.mapper.UserMapper;
 import com.lpsouti.admin.service.UserService;
@@ -18,6 +19,7 @@ import com.lpsouti.common.constant.ErrorCode;
 import com.lpsouti.common.constant.Role;
 import com.lpsouti.common.constant.UserStatus;
 import com.lpsouti.common.entity.Balance;
+import com.lpsouti.common.entity.LoginRecord;
 import com.lpsouti.common.entity.User;
 import com.lpsouti.common.entity.UserInfo;
 import com.lpsouti.common.entity.redis.LoginInfo;
@@ -35,6 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,6 +49,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final UserInfoMapper userInfoMapper;
     private final BalanceMapper balanceMapper;
+    private final LoginRecordMapper loginRecordMapper;
     private final RedisTemplate<String, Object> redisTemplate;
     private final LoginProperties loginProperties;
 
@@ -78,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public LoginVO login(LoginDTO loginDTO) {
+    public LoginVO login(LoginDTO loginDTO, String userAgent, String ip) {
         // 查找用户。根据用户名查找，用户名为空则根据邮箱查找
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(loginDTO.getUsername())) {
@@ -114,7 +118,17 @@ public class UserServiceImpl implements UserService {
             LoginInfo loginInfo = new LoginInfo(user.getId(), Role.ADMIN);
             Boolean success = redisTemplate.opsForValue().setIfAbsent(key, loginInfo, Duration.ofSeconds(loginProperties.getExpireSeconds()));
             if (Boolean.TRUE.equals(success)) {
-                // TODO 添加一条登录记录
+                // 创建登录记录对象
+                LoginRecord loginRecord = new LoginRecord();
+                loginRecord.setUserId(user.getId());
+                loginRecord.setToken(token);
+                loginRecord.setIp(ip);
+                loginRecord.setUserAgent(userAgent);
+                loginRecord.setRole(Role.ADMIN);
+                loginRecord.setExpireTime(LocalDateTime.now().plusSeconds(loginProperties.getExpireSeconds()));
+                log.debug("login record = {}", loginRecord);
+                // 添加一条登录记录
+                loginRecordMapper.insert(loginRecord);
                 return new LoginVO(user.getId(), token);
             }
         }
