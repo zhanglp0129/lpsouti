@@ -19,7 +19,7 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
 
     // 查询数据库中是否存在记录
-    @Select("select exists(select 1 from users where is_deleted=0)")
+    @Select("select exists(select 1 from users)")
     boolean exists();
 
     // 用户的条件分页查询

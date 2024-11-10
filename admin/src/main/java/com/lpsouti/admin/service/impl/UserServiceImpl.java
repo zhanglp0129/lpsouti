@@ -138,11 +138,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean exists() {
-        return userMapper.exists();
-    }
-
-    @Override
     @Transactional
     public void edit(UserEditDTO userEditDTO) {
         // 创建数据库实体

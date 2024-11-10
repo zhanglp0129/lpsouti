@@ -17,8 +17,6 @@ public interface UserService {
 
     LoginVO login(LoginDTO loginDTO, String userAgent, String ip);
 
-    Boolean exists();
-
     void edit(UserEditDTO userEditDTO);
 
     PageVO<UserVO> pageQuery(UserPageDTO userPageDTO);

@@ -1,7 +1,6 @@
 package com.lpsouti.admin.interceptor;
 
 import cn.hutool.core.util.StrUtil;
-import com.lpsouti.admin.mapper.UserMapper;
 import com.lpsouti.common.constant.Role;
 import com.lpsouti.common.entity.redis.LoginInfo;
 import com.lpsouti.common.utils.RedisKeyUtil;
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Slf4j
 public class AdminLoginInterceptor implements HandlerInterceptor {
 
-    private final UserMapper userMapper;
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
@@ -34,10 +32,6 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         }
         // 排除判断是否存在用户接口
         if ("GET".equals(method) && "/user/exists".equals(path)) {
-            return true;
-        }
-        // 排除添加用户接口(系统无用户时)
-        if ("POST".equals(method) && "/user".equals(path) && !userMapper.exists()) {
             return true;
         }
 

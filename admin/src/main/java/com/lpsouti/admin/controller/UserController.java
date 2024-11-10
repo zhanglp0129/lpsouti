@@ -48,13 +48,6 @@ public class UserController {
         return ResultVO.success(loginVO);
     }
 
-    // 判断系统中是否存在用户
-    @GetMapping("/exists")
-    public ResultVO<Boolean> exists() {
-        Boolean exists = userService.exists();
-        return ResultVO.success(exists);
-    }
-
     // 修改用户
     @PutMapping
     public ResultVO<Void> edit(@RequestBody @Valid UserEditDTO userEditDTO) {

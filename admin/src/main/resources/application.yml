@@ -8,6 +8,7 @@ spring:
     url: ${lpsouti.database.url}
     username: ${lpsouti.database.username}
     password: ${lpsouti.database.password}
+
   data:
     redis:
       host: ${lpsouti.redis.host:localhost}
@@ -20,6 +21,10 @@ spring:
           max-idle: ${lpsouti.redis.max-idle:16}
           min-idle: ${lpsouti.redis.min-idle:0}
           max-wait: ${lpsouti.redis.max-wait:10s}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:init.sql
 mybatis-plus:
   global-config:
     db-config:
@@ -43,3 +48,7 @@ server:
 lpsouti:
   login:
     expire-seconds: 86400
+  default-user:
+    username: admin
+    email: admin@lpsouti.com
+    password: lpsouti666
