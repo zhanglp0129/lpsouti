@@ -12,9 +12,10 @@ import java.time.LocalDateTime;
 
 /**
  * 题目表
+ *
  * @TableName questions
  */
-@TableName(value ="questions")
+@TableName(value = "questions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

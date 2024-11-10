@@ -10,6 +10,7 @@ import java.util.Enumeration;
 @Slf4j
 public class IpUtil {
     private static final String LOCAL_IP = "127.0.0.1";
+
     /**
      * 获取IP地址
      * <p>
@@ -85,6 +86,7 @@ public class IpUtil {
 
     /**
      * 将IPv4地址转换成字节
+     *
      * @param text
      * @return byte 字节
      */
@@ -145,7 +147,7 @@ public class IpUtil {
                     return null;
             }
         } catch (NumberFormatException e) {
-            log.error("数字格式化异常",e);
+            log.error("数字格式化异常", e);
             return null;
         }
         return bytes;
@@ -159,7 +161,7 @@ public class IpUtil {
                 addr = InetAddress.getLocalHost();
                 ip = addr.getHostAddress();
             } catch (UnknownHostException e) {
-                log.error("获取失败",e);
+                log.error("获取失败", e);
             }
             return ip;
         } else {
@@ -183,7 +185,7 @@ public class IpUtil {
                     }
                 }
             } catch (SocketException e) {
-                log.error("获取失败",e);
+                log.error("获取失败", e);
             }
         }
         return "";

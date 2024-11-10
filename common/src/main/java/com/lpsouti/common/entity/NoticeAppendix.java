@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 
 /**
  * 通知附件表
+ *
  * @TableName notice_appendices
  */
-@TableName(value ="notice_appendices")
+@TableName(value = "notice_appendices")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

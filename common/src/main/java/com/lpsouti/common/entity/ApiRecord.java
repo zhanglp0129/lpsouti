@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 
 /**
  * api调用记录表
+ *
  * @TableName api_records
  */
-@TableName(value ="api_records")
+@TableName(value = "api_records")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,7 +1,8 @@
 package com.lpsouti.common.constant;
 
 public class UserStatus {
-    private UserStatus() {}
+    private UserStatus() {
+    }
 
     // 正常
     public static final Byte NORMAL = 1;

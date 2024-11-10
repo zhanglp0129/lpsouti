@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 
 /**
  * api接口表
+ *
  * @TableName apis
  */
-@TableName(value ="apis")
+@TableName(value = "apis")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

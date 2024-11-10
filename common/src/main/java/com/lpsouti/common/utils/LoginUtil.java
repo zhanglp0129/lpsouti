@@ -22,6 +22,7 @@ public class LoginUtil {
 
     /**
      * 根据用户id强制下线
+     *
      * @param userId 用户id
      * @param mapper 登录记录的mapper层接口
      */
@@ -57,7 +58,8 @@ public class LoginUtil {
 
     /**
      * 根据登录token强制下线
-     * @param token 登录token
+     *
+     * @param token  登录token
      * @param mapper 登录记录的mapper层接口
      */
     public void forceOfflineByToken(String token, BaseMapper<LoginRecord> mapper) {

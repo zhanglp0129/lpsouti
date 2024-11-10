@@ -4,7 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class RedisKeyUtil {
-    private RedisKeyUtil() {}
+    private RedisKeyUtil() {
+    }
 
     // 登录token的redis key
     public static String login(String token) {

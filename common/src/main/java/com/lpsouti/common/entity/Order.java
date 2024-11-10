@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 
 /**
  * 订单表
+ *
  * @TableName orders
  */
-@TableName(value ="orders")
+@TableName(value = "orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

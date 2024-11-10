@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 
 /**
  * 用户api key表
+ *
  * @TableName api_keys
  */
-@TableName(value ="api_keys")
+@TableName(value = "api_keys")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -4,7 +4,8 @@ package com.lpsouti.common.constant;
  * 错误代码
  */
 public class ErrorCode {
-    private ErrorCode() {}
+    private ErrorCode() {
+    }
 
     // 通用错误代码
     public static final int COMMON_ERROR_CODE = 2000;

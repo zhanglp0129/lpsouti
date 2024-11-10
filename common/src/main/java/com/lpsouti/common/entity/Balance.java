@@ -12,9 +12,10 @@ import java.time.LocalDateTime;
 
 /**
  * 用户余额表
+ *
  * @TableName balances
  */
-@TableName(value ="balances")
+@TableName(value = "balances")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

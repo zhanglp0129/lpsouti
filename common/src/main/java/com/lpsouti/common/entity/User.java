@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 
 /**
  * 用户表
+ *
  * @TableName users
  */
-@TableName(value ="users")
+@TableName(value = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -10,7 +10,7 @@ public class SecurityUtilTest {
         String password = "123456";
         String salt = "lpsouti666";
         String encrypted = SecurityUtil.encryptPassword(password, salt);
-        assert  encrypted.equals("85de6bd64d917459aacd8d31f8f7d895");
+        assert encrypted.equals("85de6bd64d917459aacd8d31f8f7d895");
     }
 
     @Test

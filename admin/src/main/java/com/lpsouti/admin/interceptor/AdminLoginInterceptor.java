@@ -54,7 +54,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         String key = RedisKeyUtil.login(token);
         LoginInfo loginInfo = (LoginInfo) redisTemplate.opsForValue().get(key);
         log.debug("redis中的登录信息：{}", loginInfo);
-        if (loginInfo==null || loginInfo.getId()==null || loginInfo.getRole()==null) {
+        if (loginInfo == null || loginInfo.getId() == null || loginInfo.getRole() == null) {
             response.setStatus(401);
             return false;
         }

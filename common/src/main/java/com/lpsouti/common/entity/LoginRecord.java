@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 
 /**
  * 登录记录表
+ *
  * @TableName login_records
  */
-@TableName(value ="login_records")
+@TableName(value = "login_records")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

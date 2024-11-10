@@ -1,7 +1,8 @@
 package com.lpsouti.common.constant;
 
 public class OrderField {
-    private OrderField() {}
+    private OrderField() {
+    }
 
     public static final String CREATE_TIME = "create_time";
 

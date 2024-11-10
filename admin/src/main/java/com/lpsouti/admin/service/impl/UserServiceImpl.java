@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
         log.debug("user = {}", user);
 
         // 用户不存在
-        if (user==null) {
+        if (user == null) {
             throw new CommonException("用户名、邮箱或密码错误");
         }
         // 密码错误
@@ -184,7 +184,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO queryById(Long id) {
         UserVO vo = userMapper.queryById(id);
-        if (vo==null) {
+        if (vo == null) {
             throw new CommonException("该用户不存在");
         }
         return vo;
@@ -235,11 +235,11 @@ public class UserServiceImpl implements UserService {
         // 构造修改条件
         LambdaUpdateWrapper<Balance> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Balance::getUserId, id)
-                .set(balance!=null, Balance::getBalance, balance)
-                .set(freeBalance!=null, Balance::getFreeBalance, freeBalance);
+                .set(balance != null, Balance::getBalance, balance)
+                .set(freeBalance != null, Balance::getFreeBalance, freeBalance);
         // 修改数据
         int rows = balanceMapper.update(wrapper);
-        if (rows==0) {
+        if (rows == 0) {
             throw new CommonException("修改余额失败");
         }
     }

@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 
 /**
  * 支付方式表
+ *
  * @TableName pay_methods
  */
-@TableName(value ="pay_methods")
+@TableName(value = "pay_methods")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

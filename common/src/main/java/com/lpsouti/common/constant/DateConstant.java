@@ -3,7 +3,8 @@ package com.lpsouti.common.constant;
 import java.util.Locale;
 
 public class DateConstant {
-    private DateConstant() {}
+    private DateConstant() {
+    }
 
     public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";

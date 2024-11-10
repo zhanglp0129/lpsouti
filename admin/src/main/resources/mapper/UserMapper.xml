@@ -45,36 +45,36 @@
     </sql>
     <!--用户查找的结果映射-->
     <resultMap id="UserQueryResultMap" type="com.lpsouti.admin.vo.user.UserVO">
-        <id property="id" column="user.id" />
-        <result property="username" column="user.username" />
-        <result property="email" column="user.email" />
-        <result property="role" column="user.role" />
-        <result property="status" column="user.status" />
-        <result property="createTime" column="user.create_time" />
-        <result property="updateTime" column="user.update_time" />
-        <result property="isDeleted" column="user.is_deleted" />
+        <id property="id" column="user.id"/>
+        <result property="username" column="user.username"/>
+        <result property="email" column="user.email"/>
+        <result property="role" column="user.role"/>
+        <result property="status" column="user.status"/>
+        <result property="createTime" column="user.create_time"/>
+        <result property="updateTime" column="user.update_time"/>
+        <result property="isDeleted" column="user.is_deleted"/>
 
         <!-- 嵌套 UserInfo 映射 -->
         <association property="info" javaType="com.lpsouti.common.entity.UserInfo">
-            <id property="id" column="info.id" />
-            <result property="userId" column="info.user_id" />
-            <result property="nickname" column="info.nickname" />
-            <result property="avatarUrl" column="info.avatar_url" />
-            <result property="createTime" column="info.create_time" />
-            <result property="updateTime" column="info.update_time" />
-            <result property="isDeleted" column="info.is_deleted" />
+            <id property="id" column="info.id"/>
+            <result property="userId" column="info.user_id"/>
+            <result property="nickname" column="info.nickname"/>
+            <result property="avatarUrl" column="info.avatar_url"/>
+            <result property="createTime" column="info.create_time"/>
+            <result property="updateTime" column="info.update_time"/>
+            <result property="isDeleted" column="info.is_deleted"/>
         </association>
 
         <!-- 嵌套 Balance 映射 -->
         <association property="balance" javaType="com.lpsouti.common.entity.Balance">
-            <id property="id" column="balance.id" />
-            <result property="userId" column="balance.user_id" />
-            <result property="balance" column="balance.balance" />
-            <result property="freeBalance" column="balance.free_balance" />
-            <result property="refreshDate" column="balance.refresh_date" />
-            <result property="createTime" column="balance.create_time" />
-            <result property="updateTime" column="balance.update_time" />
-            <result property="isDeleted" column="balance.is_deleted" />
+            <id property="id" column="balance.id"/>
+            <result property="userId" column="balance.user_id"/>
+            <result property="balance" column="balance.balance"/>
+            <result property="freeBalance" column="balance.free_balance"/>
+            <result property="refreshDate" column="balance.refresh_date"/>
+            <result property="createTime" column="balance.create_time"/>
+            <result property="updateTime" column="balance.update_time"/>
+            <result property="isDeleted" column="balance.is_deleted"/>
         </association>
     </resultMap>
 

@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 
 /**
  * 用户信息表
+ *
  * @TableName user_info
  */
-@TableName(value ="user_info")
+@TableName(value = "user_info")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
