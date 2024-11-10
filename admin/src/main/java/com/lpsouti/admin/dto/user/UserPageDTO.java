@@ -35,6 +35,6 @@ public class UserPageDTO extends BasePageDTO implements Serializable {
     /**
      * 排序字段
      */
-    @OrderFieldEnum({USER_CREATE_TIME, BALANCE_BALANCE, BALANCE_FREE_BALANCE})
-    private String orderBy = USER_CREATE_TIME;
+    @OrderFieldEnum({CREATE_TIME, BALANCE, FREE_BALANCE})
+    private String orderBy = CREATE_TIME;
 }

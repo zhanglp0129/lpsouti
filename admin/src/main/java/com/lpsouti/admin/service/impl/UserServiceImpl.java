@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageVO<UserVO> pageQuery(UserPageDTO dto) {
         // 分页查询
-        IPage<UserVO> page = dto.toIPage(dto.getOrderBy());
+        IPage<UserVO> page = dto.toIPage();
         page = userMapper.pageQuery(page, dto);
 
         // 封装返回结果
