@@ -8,6 +8,7 @@ public class DateConstant {
     public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
     public static final String DEFAULT_TIME_ZONE = "Asia/Shanghai";
     public static final Locale DEFAULT_LOCALE = Locale.of("zh", "CN");
+
     private DateConstant() {
     }
 }

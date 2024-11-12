@@ -1,5 +1,6 @@
 package com.lpsouti.admin.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -31,7 +32,6 @@ import com.lpsouti.common.utils.SecurityUtil;
 import com.lpsouti.common.vo.PageVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,8 +67,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         UserInfo userInfo = new UserInfo();
         Balance balance = new Balance();
-        BeanUtils.copyProperties(userAddDTO, user);
-        BeanUtils.copyProperties(userAddDTO, userInfo);
+        BeanUtil.copyProperties(userAddDTO, user);
+        BeanUtil.copyProperties(userAddDTO, userInfo);
         user.setPassword(encrypted);
         user.setSalt(salt);
         log.debug("user = {}", user);
@@ -143,8 +143,8 @@ public class UserServiceImpl implements UserService {
         // 创建数据库实体
         User user = new User();
         UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(userEditDTO, user);
-        BeanUtils.copyProperties(userEditDTO, userInfo);
+        BeanUtil.copyProperties(userEditDTO, user);
+        BeanUtil.copyProperties(userEditDTO, userInfo);
 
         if (userEditDTO.getPassword() != null) {
             // 生成盐值
