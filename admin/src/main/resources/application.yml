@@ -8,6 +8,9 @@ spring:
     url: ${lpsouti.database.url}
     username: ${lpsouti.database.username}
     password: ${lpsouti.database.password}
+  threads:
+    virtual:
+      enabled: true
 
   data:
     redis:

@@ -22,16 +22,15 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 判断是否位于虚拟线程
+        log.debug("位于虚拟线程：{}", Thread.currentThread().isVirtual());
+        // 获取请求方式和路径
         String method = request.getMethod();
         String path = request.getRequestURI();
         log.debug("请求方式：{}，请求路径：{}", method, path);
 
         // 排除登录接口
         if ("POST".equals(method) && "/user/login".equals(path)) {
-            return true;
-        }
-        // 排除判断是否存在用户接口
-        if ("GET".equals(method) && "/user/exists".equals(path)) {
             return true;
         }
 
