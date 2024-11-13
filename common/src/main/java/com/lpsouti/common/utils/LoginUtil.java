@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lpsouti.common.entity.LoginRecord;
+import com.lpsouti.common.exception.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -68,7 +69,10 @@ public class LoginUtil {
         updateWrapper
                 .set(LoginRecord::getIsOffline, true)
                 .eq(LoginRecord::getToken, token);
-        mapper.update(updateWrapper);
+        int rows = mapper.update(updateWrapper);
+        if (rows == 0) {
+            throw new CommonException("强制下线失败");
+        }
 
         // 删除redis中的token
         String key = RedisKeyUtil.login(token);

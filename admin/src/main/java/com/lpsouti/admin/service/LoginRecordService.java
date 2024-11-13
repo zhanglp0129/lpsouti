@@ -6,6 +6,7 @@ import com.lpsouti.admin.dto.login_record.LoginRecordPageDTO;
 import com.lpsouti.common.entity.LoginRecord;
 import com.lpsouti.common.vo.PageVO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 
 public interface LoginRecordService {
     void edit(@Valid LoginRecordEditDTO dto);
@@ -15,4 +16,6 @@ public interface LoginRecordService {
     LoginRecord queryById(@Valid Long id);
 
     void delete(@Valid Long id, Boolean offline);
+
+    void forceOffline(@NotEmpty String token);
 }

@@ -10,6 +10,7 @@ import com.lpsouti.admin.mapper.LoginRecordMapper;
 import com.lpsouti.admin.service.LoginRecordService;
 import com.lpsouti.common.entity.LoginRecord;
 import com.lpsouti.common.exception.CommonException;
+import com.lpsouti.common.utils.LoginUtil;
 import com.lpsouti.common.utils.RedisKeyUtil;
 import com.lpsouti.common.vo.PageVO;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 
     private final LoginRecordMapper loginRecordMapper;
     private final RedisTemplate<String, Object> redisTemplate;
+    private final LoginUtil loginUtil;
 
     @Override
     public void edit(LoginRecordEditDTO dto) {
@@ -95,5 +97,10 @@ public class LoginRecordServiceImpl implements LoginRecordService {
         // 强制下线
         String key = RedisKeyUtil.login(loginRecord.getToken());
         redisTemplate.delete(key);
+    }
+
+    @Override
+    public void forceOffline(String token) {
+        loginUtil.forceOfflineByToken(token, loginRecordMapper);
     }
 }

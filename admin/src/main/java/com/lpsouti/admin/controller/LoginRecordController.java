@@ -7,6 +7,7 @@ import com.lpsouti.common.entity.LoginRecord;
 import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,14 @@ public class LoginRecordController {
                                  @RequestParam(required = false, defaultValue = "true") Boolean offline) {
         log.info("login record id = {}，offline = {}", id, offline);
         loginRecordService.delete(id, offline);
+        return ResultVO.success();
+    }
+
+    // 强制下线
+    @PatchMapping("/offline")
+    public ResultVO<Void> forceOffline(@NotEmpty String token) {
+        log.info("login record token = {}", token);
+        loginRecordService.forceOffline(token);
         return ResultVO.success();
     }
 }
