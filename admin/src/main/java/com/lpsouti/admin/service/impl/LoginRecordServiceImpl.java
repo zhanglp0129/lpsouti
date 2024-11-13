@@ -101,6 +101,6 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 
     @Override
     public void forceOffline(String token) {
-        loginUtil.forceOfflineByToken(token, loginRecordMapper);
+        loginUtil.forceOfflineByToken(token);
     }
 }

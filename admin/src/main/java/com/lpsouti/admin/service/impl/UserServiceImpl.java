@@ -199,7 +199,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (UserStatus.BANNED.equals(status) && offline) {
-            loginUtil.forceOfflineByUserId(id, loginRecordMapper);
+            loginUtil.forceOfflineByUserId(id);
         }
     }
 
@@ -221,7 +221,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (offline) {
-            loginUtil.forceOfflineByUserId(id, loginRecordMapper);
+            loginUtil.forceOfflineByUserId(id);
         }
     }
 

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lpsouti.common.entity.LoginRecord;
 import com.lpsouti.common.exception.CommonException;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,14 +22,16 @@ public class LoginUtil {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
+    @Resource
+    private final BaseMapper<LoginRecord> loginRecordMapper;
+
     /**
      * 根据用户id强制下线
      *
      * @param userId 用户id
-     * @param mapper 登录记录的mapper层接口
      */
     @Transactional
-    public void forceOfflineByUserId(Long userId, BaseMapper<LoginRecord> mapper) {
+    public void forceOfflineByUserId(Long userId) {
         // 查询所有在线的token
         LambdaQueryWrapper<LoginRecord> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper
@@ -36,7 +39,7 @@ public class LoginUtil {
                 .eq(LoginRecord::getUserId, userId)
                 .gt(LoginRecord::getExpireTime, LocalDateTime.now())
                 .eq(LoginRecord::getIsOffline, false);
-        List<LoginRecord> loginRecords = mapper.selectList(queryWrapper);
+        List<LoginRecord> loginRecords = loginRecordMapper.selectList(queryWrapper);
         log.debug("online login records = {}", loginRecords);
 
         // 获取结果ids
@@ -47,7 +50,7 @@ public class LoginUtil {
         updateWrapper
                 .set(LoginRecord::getIsOffline, true)
                 .in(LoginRecord::getId, ids);
-        mapper.update(updateWrapper);
+        loginRecordMapper.update(updateWrapper);
 
         // 删除redis中的token
         List<String> keys = loginRecords.stream()
@@ -61,15 +64,14 @@ public class LoginUtil {
      * 根据登录token强制下线
      *
      * @param token  登录token
-     * @param mapper 登录记录的mapper层接口
      */
-    public void forceOfflineByToken(String token, BaseMapper<LoginRecord> mapper) {
+    public void forceOfflineByToken(String token) {
         // 将该token设为离线
         LambdaUpdateWrapper<LoginRecord> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper
                 .set(LoginRecord::getIsOffline, true)
                 .eq(LoginRecord::getToken, token);
-        int rows = mapper.update(updateWrapper);
+        int rows = loginRecordMapper.update(updateWrapper);
         if (rows == 0) {
             throw new CommonException("强制下线失败");
         }
