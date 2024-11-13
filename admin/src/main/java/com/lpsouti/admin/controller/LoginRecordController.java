@@ -1,15 +1,15 @@
 package com.lpsouti.admin.controller;
 
 import com.lpsouti.admin.dto.login_record.LoginRecordEditDTO;
+import com.lpsouti.admin.dto.login_record.LoginRecordPageDTO;
 import com.lpsouti.admin.service.LoginRecordService;
+import com.lpsouti.common.entity.LoginRecord;
+import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/login_record")
@@ -25,5 +25,13 @@ public class LoginRecordController {
         log.info("login record edit dto = {}", dto);
         loginRecordService.edit(dto);
         return ResultVO.success();
+    }
+
+    // 登陆记录分页查询
+    @GetMapping("/page")
+    public ResultVO<PageVO<LoginRecord>> pageQuery(@Valid LoginRecordPageDTO dto) {
+        log.info("login record page query dto = {}", dto);
+        PageVO<LoginRecord> vo = loginRecordService.pageQuery(dto);
+        return ResultVO.success(vo);
     }
 }

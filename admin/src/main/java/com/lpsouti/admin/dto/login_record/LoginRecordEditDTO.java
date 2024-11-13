@@ -8,12 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRecordEditDTO {
+public class LoginRecordEditDTO implements Serializable {
     /**
      * 登录信息过期时间，不存在永不过期的登录信息
      */

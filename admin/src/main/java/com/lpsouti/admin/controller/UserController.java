@@ -58,7 +58,7 @@ public class UserController {
 
     // 分页查询用户
     @GetMapping("/page")
-    public ResultVO<PageVO<UserVO>> page(@Valid UserPageDTO userPageDTO) {
+    public ResultVO<PageVO<UserVO>> pageQuery(@Valid UserPageDTO userPageDTO) {
         log.info("userPageDTO = {}", userPageDTO);
         PageVO<UserVO> vo = userService.pageQuery(userPageDTO);
         return ResultVO.success(vo);
