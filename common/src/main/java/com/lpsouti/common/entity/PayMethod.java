@@ -41,6 +41,21 @@ public class PayMethod implements Serializable {
     private BigDecimal rate;
 
     /**
+     * 易支付接口地址
+     */
+    private String epayUrl;
+
+    /**
+     * 易支付商户id
+     */
+    private Long epayPid;
+
+    /**
+     * 易支付密钥
+     */
+    private String epayKey;
+
+    /**
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)

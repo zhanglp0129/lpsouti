@@ -76,6 +76,9 @@ create table if not exists pay_methods
     name        varchar(10)    not null comment '支付方式名称',
     currency    varchar(10)    not null default 'CNY' comment '支付货币。用英文缩写',
     rate        decimal(15, 4) not null default 1 comment '充值倍率。充值1单位货币可以获得多少余额',
+    epay_url varchar(128) comment '易支付接口地址',
+    epay_pid bigint comment '易支付商户id',
+    epay_key varchar(200) comment '易支付密钥',
     create_time datetime       not null comment '创建时间',
     update_time datetime       not null comment '修改时间',
     is_deleted  bit(1)         not null default 0 comment '是否被删除'
