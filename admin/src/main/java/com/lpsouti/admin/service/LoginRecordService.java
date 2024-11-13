@@ -13,4 +13,6 @@ public interface LoginRecordService {
     PageVO<LoginRecord> pageQuery(@Valid LoginRecordPageDTO dto);
 
     LoginRecord queryById(@Valid Long id);
+
+    void delete(@Valid Long id, Boolean offline);
 }

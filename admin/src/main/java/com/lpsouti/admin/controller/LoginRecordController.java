@@ -42,4 +42,13 @@ public class LoginRecordController {
         LoginRecord loginRecord = loginRecordService.queryById(id);
         return ResultVO.success(loginRecord);
     }
+
+    // 删除登录记录
+    @DeleteMapping("{id}")
+    public ResultVO<Void> delete(@PathVariable("id") @Valid Long id,
+                                 @RequestParam(required = false, defaultValue = "true") Boolean offline) {
+        log.info("login record id = {}，offline = {}", id, offline);
+        loginRecordService.delete(id, offline);
+        return ResultVO.success();
+    }
 }
