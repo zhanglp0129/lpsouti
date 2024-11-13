@@ -55,4 +55,9 @@ public class LoginRecordServiceImpl implements LoginRecordService {
         log.debug("page query vo = {}", vo);
         return vo;
     }
+
+    @Override
+    public LoginRecord queryById(Long id) {
+        return loginRecordMapper.selectById(id);
+    }
 }

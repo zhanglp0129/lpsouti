@@ -11,4 +11,6 @@ public interface LoginRecordService {
     void edit(@Valid LoginRecordEditDTO dto);
 
     PageVO<LoginRecord> pageQuery(@Valid LoginRecordPageDTO dto);
+
+    LoginRecord queryById(@Valid Long id);
 }

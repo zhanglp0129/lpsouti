@@ -34,4 +34,12 @@ public class LoginRecordController {
         PageVO<LoginRecord> vo = loginRecordService.pageQuery(dto);
         return ResultVO.success(vo);
     }
+
+    // 根据id查询登录记录
+    @GetMapping("/{id}")
+    public ResultVO<LoginRecord> queryById(@PathVariable("id") @Valid Long id) {
+        log.info("login record id = {}", id);
+        LoginRecord loginRecord = loginRecordService.queryById(id);
+        return ResultVO.success(loginRecord);
+    }
 }
