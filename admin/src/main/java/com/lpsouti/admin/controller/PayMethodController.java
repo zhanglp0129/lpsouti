@@ -3,11 +3,14 @@ package com.lpsouti.admin.controller;
 import com.lpsouti.admin.dto.pay_method.PayMethodAddDTO;
 import com.lpsouti.admin.dto.pay_method.PayMethodEditDTO;
 import com.lpsouti.admin.service.PayMethodService;
+import com.lpsouti.common.entity.PayMethod;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pay_method")
@@ -31,5 +34,12 @@ public class PayMethodController {
         log.info("pay method edit dto = {}", dto);
         payMethodService.edit(dto);
         return ResultVO.success();
+    }
+
+    // 查询所有支付方式
+    @GetMapping
+    public ResultVO<List<PayMethod>> queryAll() {
+        List<PayMethod> vos = payMethodService.queryAll();
+        return ResultVO.success(vos);
     }
 }

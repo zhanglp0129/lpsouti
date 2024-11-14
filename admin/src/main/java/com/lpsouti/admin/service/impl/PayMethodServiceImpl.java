@@ -1,6 +1,7 @@
 package com.lpsouti.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lpsouti.admin.dto.pay_method.PayMethodAddDTO;
 import com.lpsouti.admin.dto.pay_method.PayMethodEditDTO;
 import com.lpsouti.admin.mapper.PayMethodMapper;
@@ -10,6 +11,8 @@ import com.lpsouti.common.exception.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -42,5 +45,10 @@ public class PayMethodServiceImpl implements PayMethodService {
         if (rows == 0) {
             throw new CommonException("修改支付方式失败");
         }
+    }
+
+    @Override
+    public List<PayMethod> queryAll() {
+        return payMethodMapper.selectList(new QueryWrapper<>());
     }
 }
