@@ -51,4 +51,12 @@ public class PayMethodServiceImpl implements PayMethodService {
     public List<PayMethod> queryAll() {
         return payMethodMapper.selectList(new QueryWrapper<>());
     }
+
+    @Override
+    public void delete(Long id) {
+        int rows = payMethodMapper.deleteById(id);
+        if (rows == 0) {
+            throw new CommonException("删除支付方式失败");
+        }
+    }
 }

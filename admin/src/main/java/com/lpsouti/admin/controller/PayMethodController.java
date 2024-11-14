@@ -42,4 +42,11 @@ public class PayMethodController {
         List<PayMethod> vos = payMethodService.queryAll();
         return ResultVO.success(vos);
     }
+
+    // 删除支付方式
+    @DeleteMapping("/{id}")
+    public ResultVO<Void> delete(@PathVariable("id") Long id) {
+        payMethodService.delete(id);
+        return ResultVO.success();
+    }
 }

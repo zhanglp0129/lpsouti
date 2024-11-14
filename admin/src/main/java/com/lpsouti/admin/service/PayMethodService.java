@@ -13,4 +13,6 @@ public interface PayMethodService {
     void edit(@Valid PayMethodEditDTO dto);
 
     List<PayMethod> queryAll();
+
+    void delete(Long id);
 }

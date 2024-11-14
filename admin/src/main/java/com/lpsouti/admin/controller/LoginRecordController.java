@@ -45,7 +45,7 @@ public class LoginRecordController {
     }
 
     // 删除登录记录
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResultVO<Void> delete(@PathVariable("id") @Valid Long id,
                                  @RequestParam(required = false, defaultValue = "true") Boolean offline) {
         log.info("login record id = {}，offline = {}", id, offline);
