@@ -1,15 +1,13 @@
 package com.lpsouti.admin.controller;
 
 import com.lpsouti.admin.dto.pay_method.PayMethodAddDTO;
+import com.lpsouti.admin.dto.pay_method.PayMethodEditDTO;
 import com.lpsouti.admin.service.PayMethodService;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pay_method")
@@ -24,6 +22,14 @@ public class PayMethodController {
     public ResultVO<Void> add(@RequestBody @Valid PayMethodAddDTO dto) {
         log.info("pay method add dto = {}", dto);
         payMethodService.add(dto);
+        return ResultVO.success();
+    }
+
+    // 修改支付方式
+    @PutMapping
+    public ResultVO<Void> edit(@RequestBody @Valid PayMethodEditDTO dto) {
+        log.info("pay method edit dto = {}", dto);
+        payMethodService.edit(dto);
         return ResultVO.success();
     }
 }
