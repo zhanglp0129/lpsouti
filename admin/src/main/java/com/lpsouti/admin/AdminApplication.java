@@ -3,11 +3,9 @@ package com.lpsouti.admin;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication
-@ComponentScan("com.lpsouti")
+@SpringBootApplication(scanBasePackages = "com.lpsouti")
 @MapperScan("com.lpsouti.admin.mapper")
 @EnableTransactionManagement
 public class AdminApplication {

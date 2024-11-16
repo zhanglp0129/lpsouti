@@ -2,9 +2,9 @@ package com.lpsouti.admin.initializer;
 
 import com.lpsouti.admin.dto.user.UserAddDTO;
 import com.lpsouti.admin.mapper.UserMapper;
+import com.lpsouti.admin.properties.DefaultUserProperties;
 import com.lpsouti.admin.service.UserService;
 import com.lpsouti.common.constant.Role;
-import com.lpsouti.common.properties.DefaultUserProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

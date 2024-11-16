@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${lpsouti.database.url}
+    username: ${lpsouti.database.username}
+    password: ${lpsouti.database.password}
+  threads:
+    virtual:
+      enabled: true
+  data:
+    redis:
+      host: ${lpsouti.redis.host:localhost}
+      port: ${lpsouti.redis.port:6379}
+      database: ${lpsouti.redis.database:0}
+      password: ${lpsouti.redis.password:}
+      lettuce:
+        pool:
+          max-active: ${lpsouti.redis.max-active:18}
+          max-idle: ${lpsouti.redis.max-idle:16}
+          min-idle: ${lpsouti.redis.min-idle:0}
+          max-wait: ${lpsouti.redis.max-wait:10s}
+mybatis-plus:
+  global-config:
+    db-config:
+      update-strategy: not_null
+      id-type: auto
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    banner: false
+logging:
+  file:
+    name: ${lpsouti.log.filename:logs/${spring.application.name:lpsouti}.log}
+  level:
+    com.lpsouti: ${lpsouti.log.level:info}
+    com.baomidou.mybatisplus.core.mapper: ${lpsouti.log.level:info}
+  pattern:
+    dateformat: "yyyy-MM-dd HH:mm:ss.SSS"
+server:
+  port: ${lpsouti.server.port:8080}
+  address: ${lpsouti.server.address:0.0.0.0}
+lpsouti:
+  login:
+    expire-seconds: 86400
+  balance:
+    daily-free-balance: 2

@@ -1,4 +1,4 @@
-package com.lpsouti.common.properties;
+package com.lpsouti.admin.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
