@@ -36,3 +36,6 @@ build/
 
 ### 日志输出 ###
 /logs
+
+### 开发环境配置文件 ###
+application-dev.yml
