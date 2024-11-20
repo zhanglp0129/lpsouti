@@ -13,4 +13,6 @@ public interface OrderService {
     void edit(@Valid OrderEditDTO dto);
 
     PageVO<Order> pageQuery(@Valid OrderPageDTO dto);
+
+    Order queryById(Long id);
 }

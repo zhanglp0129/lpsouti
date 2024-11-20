@@ -43,4 +43,12 @@ public class OrderController {
         PageVO<Order> vo = orderService.pageQuery(dto);
         return ResultVO.success(vo);
     }
+
+    // 根据id查询订单
+    @GetMapping("/{id}")
+    public ResultVO<Order> queryById(@PathVariable Long id) {
+        log.info("order id = {}", id);
+        Order order = orderService.queryById(id);
+        return ResultVO.success(order);
+    }
 }

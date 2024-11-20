@@ -70,4 +70,9 @@ public class OrderServiceImpl implements OrderService {
         log.debug("page query vo = {}", vo);
         return vo;
     }
+
+    @Override
+    public Order queryById(Long id) {
+        return orderMapper.selectById(id);
+    }
 }
