@@ -22,8 +22,6 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 判断是否位于虚拟线程
-        log.debug("位于虚拟线程：{}", Thread.currentThread().isVirtual());
         // 获取请求方式和路径
         String method = request.getMethod();
         String path = request.getRequestURI();

@@ -8,6 +8,9 @@ import com.lpsouti.common.entity.Order;
 import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +53,26 @@ public class OrderController {
         log.info("order id = {}", id);
         Order order = orderService.queryById(id);
         return ResultVO.success(order);
+    }
+
+    // 删除订单
+    @DeleteMapping("/{id}")
+    public ResultVO<Void> delete(@PathVariable Long id) {
+        log.info("order id = {}", id);
+        orderService.delete(id);
+        return ResultVO.success();
+    }
+
+    // 修改订单状态
+    @PatchMapping("/status/{id}")
+    public ResultVO<Void> editStatus(
+            @PathVariable Long id,  // 订单id
+            @NotNull @Min(1) @Max(3) Byte status,   // 修改后的订单状态
+            @RequestParam(required = false, defaultValue = "true") Boolean syncBalance, // 是否同步修改余额
+            @RequestParam(required = false, defaultValue = "true") Boolean syncPayTime  // 是否同步修改余额
+    ) {
+        log.info("order id = {}, status = {}, syncBalance = {}, syncPayTime = {}", id, status, syncBalance, syncPayTime);
+        orderService.editStatus(id, status, syncBalance, syncPayTime);
+        return ResultVO.success();
     }
 }

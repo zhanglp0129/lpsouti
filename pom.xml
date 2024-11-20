@@ -27,7 +27,7 @@
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--版本控制-->
-        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <mybatis.version>3.0.3</mybatis.version>
         <hutool.version>5.8.25</hutool.version>
         <minio.version>8.5.5</minio.version>
@@ -67,6 +67,11 @@
                     <artifactId>mybatis-spring</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <!--Mybatis-->
         <dependency>
