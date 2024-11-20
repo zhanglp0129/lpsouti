@@ -8,4 +8,4 @@
 - MySQL >= 8.0.33
 - Redis >= 7.2.5
 - ElasticSearch >= 8.15.0
-- MinIO >= 2024.8.17
+- MinIO >= RELEASE.2024-08-17T01-24-54Z
