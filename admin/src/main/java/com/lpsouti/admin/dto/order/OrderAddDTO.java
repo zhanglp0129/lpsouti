@@ -1,6 +1,8 @@
 package com.lpsouti.admin.dto.order;
 
 import com.lpsouti.common.constant.OrderStatus;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +43,8 @@ public class OrderAddDTO implements Serializable {
      * 订单状态，1待支付 2已支付 3已取消。默认为待支付
      */
     @NotNull
+    @Min(1)
+    @Max(3)
     private Byte status = OrderStatus.PENDING_PAYMENT;
 
     /**

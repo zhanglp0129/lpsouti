@@ -1,5 +1,7 @@
 package com.lpsouti.admin.dto.order;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,6 +44,8 @@ public class OrderEditDTO implements Serializable {
     /**
      * 订单状态，1待支付 2已支付 3已取消
      */
+    @Min(1)
+    @Max(3)
     private Byte status;
 
     /**
