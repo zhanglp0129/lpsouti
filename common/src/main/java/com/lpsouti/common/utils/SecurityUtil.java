@@ -39,8 +39,8 @@ public class SecurityUtil {
     }
 
     // 加密密钥。与加密密码相同
-    public static String encryptSecretKey(@NotEmpty String password, @NotEmpty String salt) {
-        return encryptPassword(password, salt);
+    public static String encryptSecretKey(@NotEmpty String secretKey, @NotEmpty String salt) {
+        return encryptPassword(secretKey, salt);
     }
 
     /**
