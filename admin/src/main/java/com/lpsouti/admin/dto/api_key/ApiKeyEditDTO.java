@@ -12,16 +12,21 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiKeyAddDTO implements Serializable {
+public class ApiKeyEditDTO implements Serializable {
     /**
      * 过期时间，null表示永不过期
      */
     private LocalDateTime expireTime;
 
     /**
-     * 是否启用
+     * 用户api key id
      */
     @NotNull
+    private Long id;
+
+    /**
+     * 是否启用
+     */
     private Boolean isEnabled;
 
     /**
@@ -33,12 +38,17 @@ public class ApiKeyAddDTO implements Serializable {
     /**
      * 是否仅限免费接口
      */
-    @NotNull
     private Boolean onlyFree;
 
     /**
-     * 用户id，一个用户可以有多个api key
+     * 密钥id，一个32字节、36进制整数
      */
-    @NotNull
-    private Long userId;
+    @Length(max = 50)
+    private String secretId;
+
+    /**
+     * 密钥明文
+     */
+    @Length(max = 50)
+    private String secretKey;
 }
