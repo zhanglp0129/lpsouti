@@ -12,4 +12,6 @@ public interface ApiRecordService {
     ApiRecordQueryVO queryById(Long id);
 
     void edit(@Valid ApiRecordEditDTO dto);
+
+    void delete(Long id);
 }

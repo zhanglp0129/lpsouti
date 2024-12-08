@@ -41,4 +41,12 @@ public class ApiRecordController {
         apiRecordService.edit(dto);
         return ResultVO.success();
     }
+
+    // 删除api调用记录
+    @DeleteMapping("/{id}")
+    public ResultVO<Void> delete(@PathVariable("id") Long id) {
+        log.info("api record id = {}", id);
+        apiRecordService.delete(id);
+        return ResultVO.success();
+    }
 }

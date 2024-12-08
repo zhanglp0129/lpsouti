@@ -56,4 +56,12 @@ public class ApiRecordServiceImpl implements ApiRecordService {
             throw new CommonException("修改api调用记录失败");
         }
     }
+
+    @Override
+    public void delete(Long id) {
+        int rows = apiRecordMapper.deleteById(id);
+        if (rows == 0) {
+            throw new CommonException("删除api调用记录失败");
+        }
+    }
 }
