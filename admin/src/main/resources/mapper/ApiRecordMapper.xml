@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpsouti.admin.mapper.ApiRecordMapper">
+    <!--api调用记录查找-->
+    <sql id="ApiRecordQuery">
+        select
+        <!--api调用记录数据-->
+        api_records.id as `api_records.id`,
+        api_records.key_id as `api_records.key_id`,
+        api_records.api_id as `api_records.api_id`,
+        api_records.consume_balance as `api_records.consume_balance`,
+        api_records.consume_balance as `consume_balance`,    <!--排序字段-->
+        api_records.ip as `api_records.ip`,
+        api_records.err as `api_records.err`,
+        api_records.create_time as `api_records.create_time`,
+        api_records.create_time as `create_time`,    <!--排序字段-->
+        api_records.update_time as `api_records.update_time`,
+        api_records.is_deleted as `api_records.is_deleted`,
+        <!--api数据-->
+        apis.id as `apis.id`,
+        apis.method as `apis.method`,
+        apis.name as `apis.name`,
+        apis.path as `apis.path`,
+        apis.consume_balance as `apis.consume_balance`,
+        apis.is_free as `apis.is_free`,
+        apis.is_enabled as `apis.is_enabled`,
+        apis.create_time as `apis.create_time`,
+        apis.update_time as `apis.update_time`,
+        apis.is_deleted as `apis.is_deleted`,
+        <!--api key数据-->
+        api_keys.id as `api_keys.id`,
+        api_keys.user_id as `api_keys.user_id`,
+        api_keys.secret_id as `api_keys.secret_id`,
+        api_keys.is_enabled as `api_keys.is_enabled`,
+        api_keys.expire_time as `api_keys.expire_time`,
+        api_keys.only_free as `api_keys.only_free`,
+        api_keys.note as `api_keys.note`,
+        api_keys.create_time as `api_keys.create_time`,
+        api_keys.update_time as `api_keys.update_time`,
+        api_keys.is_deleted as `api_keys.is_deleted`
+        <!--联表-->
+        from api_records
+        left join apis on api_records.api_id = apis.id
+        left join api_keys on api_records.Key_id = api_keys.id
+        <!--数据未被删除-->
+        where api_records.is_deleted = 0
+    </sql>
+    <!--数据映射-->
+    <resultMap id="ApiRecordResultMap" type="com.lpsouti.admin.vo.api_record.ApiRecordQueryVO">
+        <!--api调用记录数据映射-->
+        <id property="id" column="api_records.id"/>
+        <result property="keyId" column="api_records.key_id"/>
+        <result property="apiId" column="api_records.api_id"/>
+        <result property="consumeBalance" column="api_records.consume_balance"/>
+        <result property="ip" column="api_records.ip"/>
+        <result property="err" column="api_records.err"/>
+        <result property="createTime" column="api_records.create_time"/>
+        <result property="updateTime" column="api_records.update_time"/>
+        <result property="isDeleted" column="api_records.is_deleted"/>
+
+        <!--api数据映射-->
+        <association property="api" javaType="com.lpsouti.admin.vo.api_record.ApiVO">
+            <id property="id" column="apis.id"/>
+            <result property="method" column="apis.method"/>
+            <result property="name" column="apis.name"/>
+            <result property="path" column="apis.path"/>
+            <result property="consumeBalance" column="apis.consume_balance"/>
+            <result property="isFree" column="apis.is_free"/>
+            <result property="isEnabled" column="apis.is_enabled"/>
+            <result property="createTime" column="apis.create_time"/>
+            <result property="updateTime" column="apis.update_time"/>
+            <result property="isDeleted" column="apis.is_deleted"/>
+        </association>
+
+        <!--api key数据映射-->
+        <association property="apiKey" javaType="com.lpsouti.common.entity.ApiKey">
+            <id property="id" column="api_keys.id"/>
+            <result property="userId" column="api_keys.user_id"/>
+            <result property="secretId" column="api_keys.secret_id"/>
+            <result property="isEnabled" column="api_keys.is_enabled"/>
+            <result property="expireTime" column="api_keys.expire_time"/>
+            <result property="onlyFree" column="api_keys.only_free"/>
+            <result property="note" column="api_keys.note"/>
+            <result property="createTime" column="api_keys.create_time"/>
+            <result property="updateTime" column="api_keys.update_time"/>
+            <result property="isDeleted" column="api_keys.is_deleted"/>
+        </association>
+    </resultMap>
+
+    <!--分页查询-->
+    <select id="pageQuery" resultMap="ApiRecordResultMap">
+        <include refid="ApiRecordQuery"/>
+        <if test="dto.userId != null">and api_keys.user_id = #{dto.userId}</if>
+        <if test="dto.apiId != null">and apis.id = #{dto.apiId}</if>
+        <if test="dto.ip != null">and api_records.ip = #{dto.ip}</if>
+        <if test="dto.success != null">and (api_records.err is null) = #{dto.success}</if>
+        <if test="dto.createTimeFrom != null">and api_records.create_time >= #{dto.createTimeFrom}</if>
+        <if test="dto.createTimeTo != null">and api_records.create_time &lt;= #{dto.createTimeTo}</if>
+    </select>
+
+</mapper>
