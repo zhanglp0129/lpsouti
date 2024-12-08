@@ -15,4 +15,6 @@ public interface ApiService {
     PageVO<Api> pageQuery(@Valid ApiPageDTO dto);
 
     Api queryById(Long id);
+
+    void delete(Long id);
 }

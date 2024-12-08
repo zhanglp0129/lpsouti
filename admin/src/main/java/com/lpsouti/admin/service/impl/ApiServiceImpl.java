@@ -72,4 +72,12 @@ public class ApiServiceImpl implements ApiService {
         log.debug("api = {}", api);
         return api;
     }
+
+    @Override
+    public void delete(Long id) {
+        int rows = apiMapper.deleteById(id);
+        if (rows == 0) {
+            throw new CommonException("删除api接口失败");
+        }
+    }
 }

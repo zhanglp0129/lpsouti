@@ -48,4 +48,11 @@ public class ApiController {
         Api vo = apiService.queryById(id);
         return ResultVO.success(vo);
     }
+
+    @DeleteMapping("/{id}")
+    public ResultVO<Void> delete(@PathVariable("id") Long id) {
+        log.info("api id = {}", id);
+        apiService.delete(id);
+        return ResultVO.success();
+    }
 }
