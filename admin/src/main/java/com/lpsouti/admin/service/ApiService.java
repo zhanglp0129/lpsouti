@@ -12,5 +12,7 @@ public interface ApiService {
 
     void edit(@Valid ApiEditDTO dto);
 
-    PageVO<Api> page(@Valid ApiPageDTO dto);
+    PageVO<Api> pageQuery(@Valid ApiPageDTO dto);
+
+    Api queryById(Long id);
 }

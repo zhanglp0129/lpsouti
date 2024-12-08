@@ -49,7 +49,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public PageVO<Api> page(ApiPageDTO dto) {
+    public PageVO<Api> pageQuery(ApiPageDTO dto) {
         IPage<Api> page = dto.toIPage();
         // 构造分页查询条件
         LambdaQueryWrapper<Api> wrapper = new LambdaQueryWrapper<>();
@@ -64,5 +64,12 @@ public class ApiServiceImpl implements ApiService {
         PageVO<Api> vo = PageVO.fromIPage(page);
         log.debug("api page vo = {}", vo);
         return vo;
+    }
+
+    @Override
+    public Api queryById(Long id) {
+        Api api = apiMapper.selectById(id);
+        log.debug("api = {}", api);
+        return api;
     }
 }

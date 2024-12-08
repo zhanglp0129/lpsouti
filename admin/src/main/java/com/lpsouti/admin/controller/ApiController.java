@@ -38,7 +38,14 @@ public class ApiController {
     @GetMapping("/page")
     public ResultVO<PageVO<Api>> pageQuery(@Valid ApiPageDTO dto) {
         log.info("api page dto = {}", dto);
-        PageVO<Api> vo = apiService.page(dto);
+        PageVO<Api> vo = apiService.pageQuery(dto);
+        return ResultVO.success(vo);
+    }
+
+    @GetMapping("/{id}")
+    public ResultVO<Api> queryById(@PathVariable("id") Long id) {
+        log.info("api id = {}", id);
+        Api vo = apiService.queryById(id);
         return ResultVO.success(vo);
     }
 }
