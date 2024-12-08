@@ -14,4 +14,6 @@ public interface ApiKeyService {
     void edit(@Valid ApiKeyEditDTO dto);
 
     PageVO<ApiKey> pageQuery(@Valid ApiKeyPageDTO dto);
+
+    ApiKey queryById(Long id);
 }

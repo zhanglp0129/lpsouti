@@ -92,4 +92,11 @@ public class ApiKeyServiceImpl implements ApiKeyService {
         log.debug("api key page vo = {}", vo);
         return vo;
     }
+
+    @Override
+    public ApiKey queryById(Long id) {
+        ApiKey apiKey = apiKeyMapper.selectById(id);
+        log.debug("api key = {}", apiKey);
+        return apiKey;
+    }
 }

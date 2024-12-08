@@ -44,4 +44,12 @@ public class ApiKeyController {
         PageVO<ApiKey> vo = apiKeyService.pageQuery(dto);
         return ResultVO.success(vo);
     }
+
+    // 根据id查询api key
+    @GetMapping("/{id}")
+    public ResultVO<ApiKey> queryById(@PathVariable("id") Long id) {
+        log.info("api key id = {}", id);
+        ApiKey vo = apiKeyService.queryById(id);
+        return ResultVO.success(vo);
+    }
 }
