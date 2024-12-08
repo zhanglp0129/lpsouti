@@ -1,5 +1,6 @@
 package com.lpsouti.common.validation;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.lpsouti.common.annotation.OrderFieldEnum;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -23,11 +24,6 @@ public class OrderFieldValidator implements ConstraintValidator<OrderFieldEnum, 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         log.debug("order field = {}", value);
-        for (String field : fields) {
-            if (field.equals(value)) {
-                return true;
-            }
-        }
-        return false;
+        return ArrayUtil.contains(fields, value);
     }
 }
