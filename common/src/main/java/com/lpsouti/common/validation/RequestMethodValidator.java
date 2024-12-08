@@ -15,6 +15,6 @@ public class RequestMethodValidator implements ConstraintValidator<RequestMethod
     @Override
     public boolean isValid(String method, ConstraintValidatorContext constraintValidatorContext) {
         log.debug("request method = {}", method);
-        return ArrayUtil.contains(methods, method);
+        return method == null || ArrayUtil.contains(methods, method);
     }
 }
