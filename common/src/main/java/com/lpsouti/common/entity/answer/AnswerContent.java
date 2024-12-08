@@ -1,7 +1,6 @@
 package com.lpsouti.common.entity.answer;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import com.lpsouti.common.annotation.QuestionTypeEnum;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,8 +16,7 @@ public abstract class AnswerContent {
     /**
      * 题目类型，1选择题 2多选题 3判断题 4填空题 5解答题 6题组
      */
-    @Min(1)
-    @Max(6)
+    @QuestionTypeEnum
     @NotNull
     protected Byte type;
 }
