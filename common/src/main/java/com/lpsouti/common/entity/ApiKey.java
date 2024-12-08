@@ -1,6 +1,7 @@
 package com.lpsouti.common.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,11 +38,13 @@ public class ApiKey implements Serializable {
     /**
      * MD5加密后的密钥
      */
+    @JsonIgnore
     private String secretKey;
 
     /**
      * secret_key加密随机盐值
      */
+    @JsonIgnore
     private String salt;
 
     /**
