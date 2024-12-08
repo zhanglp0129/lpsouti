@@ -2,6 +2,7 @@ package com.lpsouti.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.lpsouti.admin.dto.question.QuestionAddDTO;
+import com.lpsouti.admin.dto.question.QuestionEditDTO;
 import com.lpsouti.admin.mapper.QuestionMapper;
 import com.lpsouti.admin.service.QuestionService;
 import com.lpsouti.common.constant.QuestionOrigin;
@@ -35,6 +36,19 @@ public class QuestionServiceImpl implements QuestionService {
         int rows = questionMapper.insert(question);
         if (rows == 0) {
             throw new CommonException("添加题目失败");
+        }
+    }
+
+    @Override
+    public void edit(QuestionEditDTO dto) {
+        // 创建修改实体
+        Question question = new Question();
+        BeanUtil.copyProperties(dto, question);
+        log.debug("question edit entity = {}", question);
+        // 修改数据
+        int rows = questionMapper.updateById(question);
+        if (rows == 0) {
+            throw new CommonException("修改题目错误");
         }
     }
 }
