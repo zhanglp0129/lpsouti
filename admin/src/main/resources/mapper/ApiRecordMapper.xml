@@ -100,4 +100,10 @@
         <if test="dto.createTimeTo != null">and api_records.create_time &lt;= #{dto.createTimeTo}</if>
     </select>
 
+    <!--根据id查询-->
+    <select id="queryById" resultMap="ApiRecordResultMap">
+        <include refid="ApiRecordQuery"/>
+        and api_records.id = #{id}
+    </select>
+
 </mapper>

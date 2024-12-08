@@ -7,4 +7,6 @@ import jakarta.validation.Valid;
 
 public interface ApiRecordService {
     PageVO<ApiRecordQueryVO> pageQuery(@Valid ApiRecordPageDTO dto);
+
+    ApiRecordQueryVO queryById(Long id);
 }

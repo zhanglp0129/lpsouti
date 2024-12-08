@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,14 @@ public class ApiRecordController {
     public ResultVO<PageVO<ApiRecordQueryVO>> pageQuery(@Valid ApiRecordPageDTO dto) {
         log.info("api record page dto = {}", dto);
         PageVO<ApiRecordQueryVO> vo = apiRecordService.pageQuery(dto);
+        return ResultVO.success(vo);
+    }
+
+    // 根据id查询api调用记录
+    @GetMapping("/{id}")
+    public ResultVO<ApiRecordQueryVO> queryById(@PathVariable Long id) {
+        log.info("api record id = {}", id);
+        ApiRecordQueryVO vo = apiRecordService.queryById(id);
         return ResultVO.success(vo);
     }
 }

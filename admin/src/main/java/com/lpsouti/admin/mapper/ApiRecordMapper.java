@@ -18,6 +18,8 @@ public interface ApiRecordMapper extends BaseMapper<ApiRecord> {
     IPage<ApiRecordQueryVO> pageQuery(@Param("page") IPage<ApiRecordQueryVO> page,
                                       @Param("dto") ApiRecordPageDTO dto);
 
+    // 根据id查询调用记录
+    ApiRecordQueryVO queryById(Long id);
 }
 
 

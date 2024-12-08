@@ -26,4 +26,11 @@ public class ApiRecordServiceImpl implements ApiRecordService {
         log.debug("api record page vo = {}", vo);
         return vo;
     }
+
+    @Override
+    public ApiRecordQueryVO queryById(Long id) {
+        ApiRecordQueryVO vo = apiRecordMapper.queryById(id);
+        log.debug("query api record by id vo = {}", vo);
+        return vo;
+    }
 }
