@@ -16,4 +16,6 @@ public interface ApiKeyService {
     PageVO<ApiKey> pageQuery(@Valid ApiKeyPageDTO dto);
 
     ApiKey queryById(Long id);
+
+    void delete(Long id);
 }

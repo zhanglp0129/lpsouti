@@ -52,4 +52,12 @@ public class ApiKeyController {
         ApiKey vo = apiKeyService.queryById(id);
         return ResultVO.success(vo);
     }
+
+    // 删除api key
+    @DeleteMapping("/{id}")
+    public ResultVO<Void> delete(@PathVariable("id") Long id) {
+        log.info("api key id = {}", id);
+        apiKeyService.delete(id);
+        return ResultVO.success();
+    }
 }

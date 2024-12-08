@@ -99,4 +99,12 @@ public class ApiKeyServiceImpl implements ApiKeyService {
         log.debug("api key = {}", apiKey);
         return apiKey;
     }
+
+    @Override
+    public void delete(Long id) {
+        int rows = apiKeyMapper.deleteById(id);
+        if (rows == 0) {
+            throw new CommonException("删除api key失败");
+        }
+    }
 }
