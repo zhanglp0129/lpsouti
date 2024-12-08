@@ -60,6 +60,6 @@ public class QuestionAddDTO implements Serializable {
     /**
      * 上传用户id
      */
-    private Long uploadUserID;
+    private Long uploadUserId;
 
 }

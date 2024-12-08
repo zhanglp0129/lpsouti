@@ -1,6 +1,7 @@
 package com.lpsouti.common.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.lpsouti.common.entity.answer.AnswerContent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,6 +50,7 @@ public class Question implements Serializable {
     /**
      * 答案内容。一个json字符串，具体格式参考文档
      */
+    @TableField(typeHandler = JacksonTypeHandler.class)
     private AnswerContent answerContent;
 
     /**
