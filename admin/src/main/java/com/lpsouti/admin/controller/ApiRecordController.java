@@ -1,5 +1,6 @@
 package com.lpsouti.admin.controller;
 
+import com.lpsouti.admin.dto.api_record.ApiRecordEditDTO;
 import com.lpsouti.admin.dto.api_record.ApiRecordPageDTO;
 import com.lpsouti.admin.service.ApiRecordService;
 import com.lpsouti.admin.vo.api_record.ApiRecordQueryVO;
@@ -8,10 +9,7 @@ import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api_record")
@@ -34,5 +32,13 @@ public class ApiRecordController {
         log.info("api record id = {}", id);
         ApiRecordQueryVO vo = apiRecordService.queryById(id);
         return ResultVO.success(vo);
+    }
+
+    // 修改api调用记录
+    @PutMapping
+    public ResultVO<Void> edit(@RequestBody @Valid ApiRecordEditDTO dto) {
+        log.info("api record edit dto = {}", dto);
+        apiRecordService.edit(dto);
+        return ResultVO.success();
     }
 }
