@@ -50,4 +50,12 @@ public class QuestionController {
         Question question = questionService.queryById(id);
         return ResultVO.success(question);
     }
+
+    // 删除题目
+    @DeleteMapping("/{id}")
+    public ResultVO<Void> delete(@PathVariable Long id) {
+        log.info("question id = {}", id);
+        questionService.delete(id);
+        return ResultVO.success();
+    }
 }

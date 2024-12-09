@@ -85,4 +85,12 @@ public class QuestionServiceImpl implements QuestionService {
         log.debug("question = {}", question);
         return question;
     }
+
+    @Override
+    public void delete(Long id) {
+        int rows = questionMapper.deleteById(id);
+        if (rows == 0) {
+            throw new CommonException("删除题目错误");
+        }
+    }
 }

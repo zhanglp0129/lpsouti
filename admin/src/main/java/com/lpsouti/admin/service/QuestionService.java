@@ -15,4 +15,6 @@ public interface QuestionService {
     PageVO<Question> pageQuery(@Valid QuestionPageDTO dto);
 
     Question queryById(Long id);
+
+    void delete(Long id);
 }
