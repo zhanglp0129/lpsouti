@@ -30,6 +30,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setOrigin(QuestionOrigin.USER_UPLOAD);
         question.setStatus(QuestionStatus.ACCEPT);
         question.setAcceptTime(LocalDateTime.now());
+        question.setType(question.getAnswerContent().getType());
         log.debug("question add entity = {}", question);
 
         // 添加数据
@@ -44,6 +45,7 @@ public class QuestionServiceImpl implements QuestionService {
         // 创建修改实体
         Question question = new Question();
         BeanUtil.copyProperties(dto, question);
+        question.setType(question.getAnswerContent() != null ? question.getAnswerContent().getType() : null);
         log.debug("question edit entity = {}", question);
         // 修改数据
         int rows = questionMapper.updateById(question);

@@ -3,7 +3,6 @@ package com.lpsouti.admin.dto.question;
 import com.lpsouti.common.annotation.QuestionFormatEnum;
 import com.lpsouti.common.annotation.QuestionOriginEnum;
 import com.lpsouti.common.annotation.QuestionStatusEnum;
-import com.lpsouti.common.annotation.QuestionTypeEnum;
 import com.lpsouti.common.entity.answer.AnswerContent;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -78,12 +77,6 @@ public class QuestionEditDTO implements Serializable {
      */
     @QuestionStatusEnum
     private Byte status;
-
-    /**
-     * 题目类型，1选择题 2多选题 3判断题 4填空题 5解答题 6题组
-     */
-    @QuestionTypeEnum
-    private Byte type;
 
     /**
      * 上传用户id
