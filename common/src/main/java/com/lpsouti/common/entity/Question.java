@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  *
  * @TableName questions
  */
-@TableName(value = "questions")
+@TableName(value = "questions", autoResultMap = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

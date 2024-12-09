@@ -2,7 +2,10 @@ package com.lpsouti.admin.controller;
 
 import com.lpsouti.admin.dto.question.QuestionAddDTO;
 import com.lpsouti.admin.dto.question.QuestionEditDTO;
+import com.lpsouti.admin.dto.question.QuestionPageDTO;
 import com.lpsouti.admin.service.QuestionService;
+import com.lpsouti.common.entity.Question;
+import com.lpsouti.common.vo.PageVO;
 import com.lpsouti.common.vo.ResultVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +31,12 @@ public class QuestionController {
         log.info("question edit dto = {}", dto);
         questionService.edit(dto);
         return ResultVO.success();
+    }
+
+    @GetMapping("/page")
+    public ResultVO<PageVO<Question>> pageQuery(@Valid QuestionPageDTO dto) {
+        log.info("question page dto = {}", dto);
+        PageVO<Question> vo = questionService.pageQuery(dto);
+        return ResultVO.success(vo);
     }
 }

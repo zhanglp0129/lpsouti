@@ -2,7 +2,6 @@ package com.lpsouti.admin.dto.question;
 
 import com.lpsouti.common.annotation.QuestionFormatEnum;
 import com.lpsouti.common.annotation.QuestionOriginEnum;
-import com.lpsouti.common.annotation.QuestionStatusEnum;
 import com.lpsouti.common.entity.answer.AnswerContent;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -72,11 +71,11 @@ public class QuestionEditDTO implements Serializable {
      */
     private BigDecimal rewardBalance;
 
-    /**
-     * 题目状态，1待审核 2已通过 3已驳回
-     */
-    @QuestionStatusEnum
-    private Byte status;
+//    /**
+//     * 题目状态，1待审核 2已通过 3已驳回
+//     */
+//    @QuestionStatusEnum
+//    private Byte status;
 
     /**
      * 上传用户id

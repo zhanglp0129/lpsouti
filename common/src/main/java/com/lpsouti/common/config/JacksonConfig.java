@@ -1,5 +1,6 @@
 package com.lpsouti.common.config;
 
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,6 +61,9 @@ public class JacksonConfig {
         // 答案内容反序列化器
         module.addDeserializer(AnswerContent.class, new AnswerContentDeserializer());
         objectMapper.registerModule(module);
+
+        // 设置Mybatis Plus的JacksonTypeHandler
+        JacksonTypeHandler.setObjectMapper(objectMapper);
 
         return objectMapper;
     }
