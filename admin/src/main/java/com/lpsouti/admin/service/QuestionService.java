@@ -13,4 +13,6 @@ public interface QuestionService {
     void edit(@Valid QuestionEditDTO dto);
 
     PageVO<Question> pageQuery(@Valid QuestionPageDTO dto);
+
+    Question queryById(Long id);
 }

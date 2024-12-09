@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class QuestionController {
     private final QuestionService questionService;
 
+    // 添加题目
     @PostMapping
     public ResultVO<Void> add(@RequestBody @Valid QuestionAddDTO dto) {
         log.info("question add dto = {}", dto);
@@ -26,6 +27,7 @@ public class QuestionController {
         return ResultVO.success();
     }
 
+    // 修改题目
     @PutMapping
     public ResultVO<Void> edit(@RequestBody @Valid QuestionEditDTO dto) {
         log.info("question edit dto = {}", dto);
@@ -33,10 +35,19 @@ public class QuestionController {
         return ResultVO.success();
     }
 
+    // 分页查询题目
     @GetMapping("/page")
     public ResultVO<PageVO<Question>> pageQuery(@Valid QuestionPageDTO dto) {
         log.info("question page dto = {}", dto);
         PageVO<Question> vo = questionService.pageQuery(dto);
         return ResultVO.success(vo);
+    }
+
+    // 根据id查询题目
+    @GetMapping("/{id}")
+    public ResultVO<Question> queryById(@PathVariable Long id) {
+        log.info("question id = {}", id);
+        Question question = questionService.queryById(id);
+        return ResultVO.success(question);
     }
 }

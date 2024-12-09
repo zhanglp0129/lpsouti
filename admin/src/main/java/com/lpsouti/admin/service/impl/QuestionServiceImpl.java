@@ -78,4 +78,11 @@ public class QuestionServiceImpl implements QuestionService {
         log.debug("question page query vo = {}", vo);
         return vo;
     }
+
+    @Override
+    public Question queryById(Long id) {
+        Question question = questionMapper.selectById(id);
+        log.debug("question = {}", question);
+        return question;
+    }
 }
